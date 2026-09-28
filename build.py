@@ -48,26 +48,6 @@ IMAGES = {
     "area-central-coast": _CDN + "hf_20260928_144359_8a1100bd-ce3c-44fa-b8e6-3c9a95d0cab4.png",
     "contact-dusk": _CDN + "hf_20260928_144358_8f4a555a-dc15-47e0-9d01-ca31f47c0544.png",
 }
-# Real job photos from the client's Google Business Profile (Google Drive folder
-# 1sTtxHhbKCWHl5VrwMjFNcOx0zCIqKIbL). Referenced via Drive's public thumbnail endpoint for
-# now; tools/fetch_assets.py downloads them into assets/img/work/ for self-hosting.
-GBP_PHOTOS = [
-    {"n": 1, "id": "1F4rDATwENsnoONtFXjAgtyaTpO-v_lbs", "alt": "Freshly mown front lawn with clean cut lines under a large shade tree, by OneVision Lawns & Gardens", "cap": "Front lawn, fresh cut"},
-    {"n": 2, "id": "1aaxHql10ol28ySR6KptcQgFnJEt3CZQh", "alt": "Sloped lawn edged by a mulched garden bed and white fence after a OneVision garden maintenance visit", "cap": "Lawn and mulched beds"},
-    {"n": 3, "id": "1L_qWHW52eDIH0GvXQ8DjPVsmA29VZIdd", "alt": "Neatly mown nature strip between footpath and road with a young street tree", "cap": "Nature strip"},
-    {"n": 4, "id": "1aNY6jsS-dvpvXlFGBvJ8NCxgVY12eCRL", "alt": "Backyard lawn in late afternoon light with a flowering shrub and timber fence, mowed by OneVision", "cap": "Backyard, afternoon cut"},
-    {"n": 5, "id": "1la6TMjsT4xk3XenjiaPP0eHJNIgWAI_P", "alt": "Trimmed nature strip running along a white rendered wall", "cap": "Nature strip and edges"},
-    {"n": 6, "id": "1dQtk6Qc14IRdPm0vjE8AE-RMX9Iyum9z", "alt": "OneVision work ute parked beside a freshly cut lawn between driveways", "cap": "On the job"},
-    {"n": 7, "id": "1I0JCZ2n8dD0Lj1BnTOQaDkJa47V5Zzmi", "alt": "Large backyard lawn with clothesline and colorbond fence, freshly mowed", "cap": "Big backyard block"},
-    {"n": 8, "id": "1kLP0aAr2mfhtNKgzg8AwVZeE4ohotsnY", "alt": "Lush green lawn beside a brick wall and concrete path, edged clean", "cap": "Lawn along the path"},
-    {"n": 9, "id": "1kROvB-Pb0ZK4xHtJpooRyx6kx3mW1If3", "alt": "Long open backyard lawn running down to trees behind a brick home", "cap": "Long backyard lawn"},
-]
-GBP_ORDER = [1, 6, 2, 4, 7, 8, 9, 3, 5]   # display order in the gallery; first is the feature tile
-
-def work_photo_url(p, w=1000):
-    if USE_LOCAL_IMAGES:
-        return f"/assets/img/work/photo-{p['n']}.webp"
-    return f"https://drive.google.com/thumbnail?id={p['id']}&sz=w{w}"
 # Hero loop rendered with Higgsfield (kling3_0, 5s, 16:9). Hot-linked for now; download and self-host at /assets/video/hero.mp4 before launch.
 HERO_VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_3EWpoiN6nlg900Jz4gzZzRlxgtK/hf_20260928_145907_35c8138b-ebb4-4b24-a53b-6f0c2e2602be.mp4"
 CTA = "Get a Free Quote"
@@ -106,14 +86,14 @@ ICONS = {
 # Services (from the Phase 4 spec: H1, meta title, target keyword, audience)
 # ---------------------------------------------------------------------------
 SERVICES = [
- {"slug":"lawn-maintenance","name":"Lawn Maintenance","short":"Lawn Mowing","icon":"mower","img":"lawn-mowing.webp","photo":1,
+ {"slug":"lawn-maintenance","name":"Lawn Maintenance","short":"Lawn Mowing","icon":"mower","img":"lawn-mowing.webp",
   "dd":"Hornsby & the Upper North Shore","card":"Regular mowing, edging and lawn care for Hornsby, Wahroonga, Turramurra and the Central Coast. Fortnightly or as needed.",
   "kw":"lawn mowing hornsby",
   "h1":"Lawn Mowing Hornsby & the Upper North Shore",
   "title":"Lawn Mowing Hornsby & Upper North Shore | OneVision Lawns",
   "meta":"Lawn mowing Hornsby and the Upper North Shore. Regular mowing, edging and lawn care from Roseville to Mount Ku-ring-gai. Free quotes from OneVision Lawns.",
   "audience":"Homeowners, landlords and strata"},
- {"slug":"garden-maintenance","name":"Garden Maintenance","short":"Garden Care","icon":"leaf","img":"garden-maintenance.webp","photo":2,
+ {"slug":"garden-maintenance","name":"Garden Maintenance","short":"Garden Care","icon":"leaf","img":"garden-maintenance.webp",
   "dd":"Central Coast & North Shore","card":"Pruning, weeding, mulching and bed care on a regular schedule, so the garden stays tidy without you lifting a finger.",
   "kw":"garden maintenance central coast",
   "h1":"Garden Maintenance Central Coast: Regular Gardeners You Can Book",
@@ -134,14 +114,14 @@ SERVICES = [
   "title":"Hedge Trimming North Shore | OneVision Lawns & Gardens",
   "meta":"Hedge trimming North Shore. Neat, shaped hedges for Upper North Shore homes in Wahroonga, St Ives, Turramurra and Pymble. Free quotes from OneVision.",
   "audience":"Established-garden homeowners"},
- {"slug":"garden-clean-ups","name":"Clean Ups","short":"Garden Clean Ups","icon":"broom","img":"clean-ups.webp","photo":7,
+ {"slug":"garden-clean-ups","name":"Clean Ups","short":"Garden Clean Ups","icon":"broom","img":"clean-ups.webp",
   "dd":"Pre-sale, end of lease & overgrown yards","card":"One-off garden clean ups that bring an overgrown yard back to tidy in a day, with all green waste removed.",
   "kw":"garden clean up central coast",
   "h1":"Garden Clean Up Central Coast: Overgrown Yards Brought Back",
   "title":"Garden Clean Up Central Coast | OneVision Lawns & Gardens",
   "meta":"Garden clean up Central Coast. One-off clean ups for overgrown yards, pre-sale tidies and end of lease from Woy Woy to Wyong. Free quotes from OneVision.",
   "audience":"Pre-sale, end of lease and neglected yards"},
- {"slug":"weed-control","name":"Weed Control","short":"Weed Control","icon":"spray","img":"weed-control.webp","photo":8,
+ {"slug":"weed-control","name":"Weed Control","short":"Weed Control","icon":"spray","img":"weed-control.webp",
   "dd":"Lawns, garden beds & paths","card":"Targeted weed treatment for lawns, garden beds, driveways and paths, followed up so the weeds stay gone.",
   "kw":"weed control central coast",
   "h1":"Weed Control Central Coast for Lawns, Garden Beds & Paths",
@@ -152,13 +132,6 @@ SERVICES = [
 SVC_BY = {s["slug"]: s for s in SERVICES}
 
 def svc_url(slug): return f"/services/{slug}/"
-
-def card_img(s):
-    """Real job photo where one fits the service, generated image otherwise."""
-    if s.get("photo"):
-        p = next(x for x in GBP_PHOTOS if x["n"] == s["photo"])
-        return f'<img src="{work_photo_url(p, 800)}" alt="{esc(p["alt"])}" loading="lazy" width="600" height="800">'
-    return f'<img src="/assets/img/{s["img"]}" alt="{esc(s["name"])} on the Central Coast and Upper North Shore by OneVision Lawns &amp; Gardens" loading="lazy" width="800" height="600">'
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -397,26 +370,6 @@ def faq_html(faqs, eyebrow="Questions", title="Straight answers before you book"
   </div>
 </section>"""
 
-def work_gallery(light=False, limit=9, heading="Recent work across the Coast and the North Shore", eyebrow="Real jobs, real photos"):
-    cls = "section on-grey" if light else "section on-dark grain"
-    by = {p["n"]: p for p in GBP_PHOTOS}
-    tiles = ""
-    for i, n in enumerate(GBP_ORDER[:limit]):
-        p = by[n]
-        cap = f'<figcaption>{esc(p["cap"])}</figcaption>' if p["cap"] else ""
-        tiles += f'<figure class="work-tile reveal" data-d="{i%4}"><img src="{work_photo_url(p)}" alt="{esc(p["alt"])}" loading="lazy" width="600" height="800">{cap}</figure>'
-    return f"""<section class="{cls}" id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">{esc(eyebrow)}</span>
-      <h2>{esc(heading)}</h2>
-      <p>Straight off the job, not a stock library. Every photo below is a OneVision lawn or garden, as posted on our Google profile.</p>
-    </div>
-    <div class="work-grid">{tiles}</div>
-    <p class="work-more reveal"><a href="{GMB}" target="_blank" rel="noopener" class="link-arrow">See more on our Google profile {ICONS['arrow']}</a></p>
-  </div>
-</section>"""
-
 def cta_strip(title="Ready for a lawn you do not have to think about?", sub="Free quotes across the Central Coast and Upper North Shore. One call, one number."):
     return f"""<section class="cta-strip">
   <span class="ghost" aria-hidden="true">GO</span>
@@ -539,7 +492,7 @@ def build_home():
     svc_cards = ""
     for i, s in enumerate(SERVICES):
         svc_cards += f"""<a href="{svc_url(s['slug'])}" class="svc-card reveal" data-d="{i%3}">
-  <div class="svc-card__media">{card_img(s)}<span class="svc-card__num">0{i+1}</span></div>
+  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} on the Central Coast and Upper North Shore by OneVision Lawns &amp; Gardens" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
   <div class="svc-card__body"><span class="icon">{ICONS[s['icon']]}</span><h3>{esc(s['name'])}</h3><p>{esc(s['card'])}</p><span class="link-arrow">{esc(s['dd'])} {ICONS['arrow']}</span></div>
 </a>"""
     marquee = "".join(f"<span>{esc(x)}</span>" for x in ["Lawn mowing", "Garden maintenance", "Turf installation", "Hedge trimming", "Garden clean ups", "Weed control", "Central Coast", "Upper North Shore", "Hornsby", "Gosford", "Terrigal", "Wahroonga", "St Ives", "Wyong", "Woy Woy", "Turramurra"])
@@ -592,7 +545,7 @@ def build_home():
       <a href="/about/" class="link-arrow" style="margin-top:26px">More about OneVision {ICONS['arrow']}</a>
     </div>
     <div class="intro__media reveal" data-d="1">
-      <img src="{work_photo_url(GBP_PHOTOS[5])}" alt="{esc(GBP_PHOTOS[5]['alt'])}" loading="lazy" width="600" height="800">
+      <img src="/assets/img/about-ute.webp" alt="OneVision Lawns &amp; Gardens work ute and trailer loaded with mowers on a leafy suburban street" loading="lazy" width="1200" height="900">
       <div class="intro__badge"><b>5.0</b>Google rating</div>
     </div>
   </div>
@@ -644,9 +597,7 @@ def build_home():
   </div>
 </section>
 
-{work_gallery(light=True)}
-
-{areas_block(light=False)}
+{areas_block(light=True)}
 
 <section class="section on-dark grain" id="reviews">
   <div class="wrap proof">
@@ -939,7 +890,6 @@ def build_service(s):
     {service_aside(s['slug'])}
   </div>
 </section>
-{work_gallery(light=True, limit=4, heading=s['name'] + ' jobs, as posted on our Google profile', eyebrow='Recent work') if s['slug'] in ('lawn-maintenance','garden-maintenance','garden-clean-ups','weed-control') else ''}
 {faq_html(b['faq'], eyebrow=s['name'] + ' FAQs', title='Questions about ' + s['name'].lower(), light=False)}
 {areas_block(light=True, heading=s['name'] + ' across both regions', eyebrow='Where we do it')}
 {contact_section(preselect=s['slug'])}
@@ -953,7 +903,7 @@ def build_services_index():
     cards = ""
     for i, s in enumerate(SERVICES):
         cards += f"""<a href="{svc_url(s['slug'])}" class="svc-card reveal" data-d="{i%3}">
-  <div class="svc-card__media">{card_img(s)}<span class="svc-card__num">0{i+1}</span></div>
+  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} by OneVision Lawns &amp; Gardens" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
   <div class="svc-card__body"><span class="icon">{ICONS[s['icon']]}</span><h3>{esc(s['h1'].split(':')[0].replace(' & the Upper North Shore','').replace(' for Lawns, Garden Beds & Paths',''))}</h3><p>{esc(s['card'])}</p><span class="link-arrow">{esc(s['dd'])} {ICONS['arrow']}</span></div>
 </a>"""
     schema = [local_business(), breadcrumbs([("Home", "/"), ("Services", path)]),
@@ -1094,7 +1044,7 @@ def build_about():
         <li>{ICONS['check']} Regular customers get a text the day before each visit</li>
       </ul>
     </div>
-    <div class="intro__media reveal" data-d="1"><img src="{work_photo_url(GBP_PHOTOS[3])}" alt="{esc(GBP_PHOTOS[3]['alt'])}" loading="lazy" width="600" height="800"><div class="intro__badge"><b>116</b>suburbs covered</div></div>
+    <div class="intro__media reveal" data-d="1"><img src="/assets/img/lawn-mowing.webp" alt="Lawn mower cutting clean stripes on a well kept lawn" loading="lazy" width="1200" height="900"><div class="intro__badge"><b>116</b>suburbs covered</div></div>
   </div>
 </section>
 <section class="section on-dark grain">
@@ -1108,8 +1058,7 @@ def build_about():
     </div>
   </div>
 </section>
-{work_gallery(light=True)}
-{areas_block(light=False)}
+{areas_block(light=True)}
 {cta_strip()}
 {contact_section()}
 """ + footer_html()

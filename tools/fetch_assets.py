@@ -11,7 +11,7 @@ to create the site could not reach the Higgsfield CDN).
 import io, sys, urllib.request
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from build import IMAGES, ROOT, GBP_PHOTOS  # noqa: E402
+from build import IMAGES, ROOT  # noqa: E402
 from PIL import Image  # noqa: E402
 
 OUT = ROOT / "assets" / "img"
@@ -26,12 +26,3 @@ for name, url in IMAGES.items():
     if name == "hero":
         im.resize((1200, int(1200 * im.height / im.width))).crop((0, 0, 1200, 630)).save(OUT / "og-home.jpg", quality=82)
 print("done. Now set USE_LOCAL_IMAGES = True in build.py and run: python3 build.py")
-
-# Real job photos from Google Drive (public folder). Kept portrait as-is, max 1000px tall.
-WORK = OUT / "work"; WORK.mkdir(exist_ok=True)
-for p in GBP_PHOTOS:
-    print("fetching work photo", p["n"])
-    data = urllib.request.urlopen(f"https://drive.google.com/uc?export=download&id={p['id']}", timeout=120).read()
-    im = Image.open(io.BytesIO(data)).convert("RGB")
-    im.thumbnail((1000, 1000))
-    im.save(WORK / f"photo-{p['n']}.webp", format="WEBP", quality=80, method=6)
