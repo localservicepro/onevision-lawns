@@ -325,10 +325,6 @@ def footer_html():
     </div>
   </div>
 </footer>
-<div class="call-bar" aria-label="Quick actions">
-  <a href="tel:{PHONE_RAW}" class="btn btn--ghost">{ICONS['phone']} Call now</a>
-  <a href="/contact/#quote" class="btn btn--primary">Free quote</a>
-</div>
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>
