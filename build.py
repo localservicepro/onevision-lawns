@@ -10,6 +10,7 @@ re-run, commit the generated HTML.
 """
 import json, os, re, html as htmlmod
 from pathlib import Path
+from areamap import area_map
 
 ROOT = Path(__file__).parent
 
@@ -382,27 +383,36 @@ def cta_strip(title="Ready for a lawn you do not have to think about?", sub="Fre
   </div>
 </section>"""
 
-def areas_block(light=True, heading="Areas we service", eyebrow="Two regions, 116 suburbs"):
+def suburb_list(items):
+    return '<ul class="suburbs">' + "".join(f'<li data-suburb-ref="{esc(i)}">{esc(i)}</li>' for i in items) + "</ul>"
+
+def region_card(region, title, count, blurb, anchors, items, link, link_text, d=0, open_list=False):
+    return f"""<div class="region-card reveal" data-region="{region}" data-d="{d}">
+  <div class="region-head"><h3>{title}</h3><span class="count">{count} suburbs</span></div>
+  <p>{blurb}</p>
+  <ul class="anchors">{"".join(f"<li>{esc(a)}</li>" for a in anchors)}</ul>
+  <details{" open" if open_list else ""}><summary>Every suburb we cover in this region</summary>{suburb_list(items)}</details>
+  <a href="{link}" class="link-arrow">{link_text} {ICONS['arrow']}</a>
+</div>"""
+
+def areas_block(light=True, heading="Areas we service", eyebrow="Two regions, 116 suburbs", focus=None, intro=None):
     cls = "section on-grey" if light else "section on-dark"
+    legend = '<div class="am-legend"><button type="button" data-region="uns">Upper North Shore</button><button type="button" data-region="cc">Central Coast</button></div>'
+    m = area_map(focus).replace('<div class="am-tip"', legend + '<div class="am-tip"')
+    m = m.replace('<div class="area-map', f'<div class="area-map" data-default-focus="{focus or ""}" data-x="', 1).replace('" data-x="', '', 1) if False else m
+    if focus: m = m.replace('aria-hidden="true">', f'aria-hidden="true" data-default-focus="{focus}">', 1)
     return f"""<section class="{cls}" id="areas">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">{esc(eyebrow)}</span>
       <h2>{esc(heading)}</h2>
-      <p>OneVision works two regions: Sydney's Upper North Shore and Hornsby, and the Central Coast from the Peninsula up to Lake Macquarie's southern edge. If your suburb is below, we come to you.</p>
+      <p>{intro or "OneVision works two regions: Sydney's Upper North Shore and Hornsby, and the Central Coast from the Peninsula up to Lake Macquarie's southern edge. Hover a suburb to find it on the map."}</p>
     </div>
-    <div class="areas">
-      <div class="region reveal"><span class="ghost" aria-hidden="true">UNS</span>
-        <h3>Upper North Shore &amp; Hornsby</h3><span class="count">{len(UNS)} suburbs</span>
-        <p>Big established gardens, tall hedges and shaded lawns from Roseville to Mount Ku-ring-gai.</p>
-        {chips(UNS)}
-        <a href="/areas/upper-north-shore/" class="link-arrow">Upper North Shore gardener {ICONS['arrow']}</a>
-      </div>
-      <div class="region reveal" data-d="1"><span class="ghost" aria-hidden="true">CC</span>
-        <h3>Central Coast</h3><span class="count">{len(CC)} suburbs</span>
-        <p>Lawn mowing Central Coast homes and holiday houses from Woy Woy and Umina to Gosford, Terrigal, The Entrance, Wyong and Toukley, on coastal lawns and sandy soils.</p>
-        {chips(CC)}
-        <a href="/areas/" class="link-arrow">Every suburb we cover {ICONS['arrow']}</a>
+    <div class="areas-layout">
+      <div class="reveal">{m}</div>
+      <div class="region-list">
+        {region_card("uns", "Upper North Shore &amp; Hornsby", len(UNS), "Big established gardens, tall hedges and shaded lawns from Roseville to Mount Ku-ring-gai.", ["Hornsby","Wahroonga","Turramurra","St Ives","Pymble","Killara"], UNS, "/areas/upper-north-shore/", "Upper North Shore gardener", 1, open_list=(focus=="uns"))}
+        {region_card("cc", "Central Coast", len(CC), "Lawn mowing Central Coast homes and holiday houses from Woy Woy and Umina to Gosford, Terrigal, The Entrance, Wyong and Toukley, on coastal lawns and sandy soils.", ["Gosford","Terrigal","Erina","The Entrance","Wyong","Woy Woy","Toukley"], CC, "/areas/", "Every suburb we cover", 2, open_list=(focus=="cc"))}
       </div>
     </div>
   </div>
@@ -632,7 +642,7 @@ SERVICE_BODIES = {
  "body": f"""
 <h2>Lawn mowing in Hornsby that turns up when it says it will</h2>
 <p>Lawn mowing Hornsby customers book with OneVision for one reason: it gets done, properly, on the day we said. Hornsby and the Upper North Shore have big blocks, shaded lawns under gums and buffalo that grows a foot in a wet fortnight. A quick pass with a mower does not cut it, so ours is a full lawn maintenance visit every time.</p>
-<p>Each visit includes mowing to the right height for your grass type, edging along paths, driveways and garden beds, whipper snipping around trees, fences and retaining walls, and blowing down hard surfaces so nothing is left behind. Clippings are caught and removed unless you prefer them mulched back in.</p>
+<p>Each lawn mowing Hornsby visit includes mowing to the right height for your grass type, edging along paths, driveways and garden beds, whipper snipping around trees, fences and retaining walls, and blowing down hard surfaces so nothing is left behind. Clippings are caught and removed unless you prefer them mulched back in.</p>
 
 <h2>What is included in a lawn mowing Hornsby visit</h2>
 <ul>
@@ -699,7 +709,7 @@ SERVICE_BODIES = {
 <p>We cover 91 Central Coast suburbs. On the Peninsula that means Woy Woy, Blackwall, Booker Bay, Ettalong Beach, Umina Beach, Pearl Beach and Patonga. Around Gosford it is West, East and North Gosford, Point Clare, Wyoming, Narara, Niagara Park, Lisarow and Kariong. On the coast, Erina, Terrigal, Avoca Beach, Copacabana, Macmasters Beach, Wamberal, Forresters Beach, Bateau Bay, Long Jetty, The Entrance, Blue Bay, Toowoon Bay and Shelly Beach. North of Tuggerah, we cover Wyong, Berkeley Vale, Ourimbah, Toukley, Norah Head, Budgewoi, Lake Haven, Gorokan, Summerland Point and Gwandalan. The full list is on our <a href="/areas/">areas page</a>.</p>
 <p>We also run regular garden maintenance on <a href="/areas/upper-north-shore/">Sydney's Upper North Shore</a>, so if you have properties in both places, one gardener can handle both.</p>
 
-<h2>How a maintenance schedule works</h2>
+<h2>How a garden maintenance Central Coast schedule works</h2>
 <p>The first visit is usually a longer reset to bring the garden back to a baseline: overgrowth cut back, beds cleared and mulched, hedges reshaped. After that, regular visits are shorter and cheaper because we are maintaining rather than rescuing. You get a fixed price per visit, a text the day before, and the same gardener each time.</p>
 <p>If the garden has got well away, start with a <a href="/services/garden-clean-ups/">garden clean up</a> and move onto a schedule from there. Weed problems in lawns and paths are handled under <a href="/services/weed-control/">weed control</a>.</p>
 """,
@@ -736,7 +746,7 @@ SERVICE_BODIES = {
 </div>
 <p>We also supply Zoysia for premium low-mow lawns and shade-tolerant blends for gardens under gums. If you are not sure, tell us where the lawn is and how it gets used and we will recommend one.</p>
 
-<h2>When to lay turf on the coast</h2>
+<h2>When to book turf laying Central Coast wide</h2>
 <p>Turf can be laid year round on the Central Coast, but spring (September to November) and early autumn (March to April) give the fastest establishment with the least watering. Summer laying works if you can commit to daily watering for the first two to three weeks. Winter laying is fine for buffalo, just slower to knit. Turf searches on the coast spike every September for a reason: it is the best month to book.</p>
 
 <h2>Turf laying Central Coast: Gosford to Toukley</h2>
@@ -780,7 +790,7 @@ SERVICE_BODIES = {
 <p>We trim hedges in Wahroonga, North Wahroonga, St Ives, St Ives Chase, Turramurra, South and North Turramurra, Warrawee, Pymble, West Pymble, Gordon, Killara, East Killara, Lindfield, East Lindfield and Roseville, and through Hornsby Shire in Hornsby, Hornsby Heights, Normanhurst, Waitara, Thornleigh, Westleigh, Asquith, Mount Colah and Mount Ku-ring-gai. Established federation and mid-century gardens with mature hedging are what we see most, and what we are set up for.</p>
 <p>The same service runs on the <a href="/">Central Coast</a>, where coastal hedges of westringia, coprosma and lilly pilly need trimming just as often.</p>
 
-<h2>Getting a hedge quote</h2>
+<h2>Getting a hedge trimming North Shore quote</h2>
 <p>Send a photo of the hedge with something in frame for scale, or the address and a rough length and height. Most hedge jobs can be quoted from photos. Bigger reductions and very tall screens we will look at in person. Either way the price is confirmed before we start, and it includes taking the clippings away.</p>
 """,
  "faq": [
@@ -816,7 +826,7 @@ SERVICE_BODIES = {
   <div class="mini"><b>Neglected yards</b><span>Deceased estates, holiday homes left too long, or a block that simply beat you this year. We have seen worse.</span></div>
 </div>
 
-<h2>Spring clean ups on the coast</h2>
+<h2>Spring garden clean up Central Coast bookings</h2>
 <p>September is the busiest month of the year for garden clean ups on the Central Coast. Winter growth has thickened, the weeds have set, and everyone wants the yard ready before the warm weather. If you want a spring clean up booked before the rush, contact us in August. Once the reset is done, most customers move onto regular <a href="/services/garden-maintenance/">garden maintenance</a> or <a href="/services/lawn-maintenance/">lawn mowing</a> so it never gets that bad again.</p>
 
 <h2>How a clean up is quoted</h2>
@@ -854,7 +864,7 @@ SERVICE_BODIES = {
   <div class="mini"><b>Clover &amp; oxalis</b><span>Sign of a hungry or compacted lawn. Treated, then fixed with feeding and aeration so they do not return.</span></div>
 </div>
 
-<h2>How our program works</h2>
+<h2>How our weed control Central Coast program works</h2>
 <p>We identify what is growing, choose a product that targets it without harming the lawn or plants around it, apply it in the right conditions, and come back to check. Lawn weeds are usually paired with a feed so the grass thickens and crowds out the next generation. Paths and driveways get a treatment that stops regrowth for months rather than weeks.</p>
 <p>Where pets and kids use the lawn, we tell you exactly what was applied and how long to stay off it. Where you would prefer no chemical treatment at all, we can hand weed, mulch and manage through mowing height instead.</p>
 
@@ -902,7 +912,7 @@ def build_services_index():
 </a>"""
     schema = [local_business(), breadcrumbs([("Home", "/"), ("Services", path)]),
               {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": s["name"], "url": SITE_URL + svc_url(s["slug"])} for i, s in enumerate(SERVICES)]}]
-    body = header_html("services") + page_hero("Lawn &amp; garden services for the Central Coast and Upper North Shore", "Six services, all done by the same owner-operated crew. Book one, or bundle the lawn, hedges and beds into a single regular visit.", [("Home", "/"), ("Services", path)], "hero.jpg", "Freshly mown lawn on the Central Coast", eyebrow="All services") + f"""
+    body = header_html("services") + page_hero("Lawn &amp; garden services for the Central Coast and Upper North Shore", "Six services, all done by the same owner-operated crew. Book one, or bundle the lawn, hedges and beds into a single regular visit.", [("Home", "/"), ("Services", path)], "hero.webp", "Freshly mown lawn on the Central Coast", eyebrow="All services") + f"""
 <section class="section on-dark grain">
   <div class="wrap"><div class="services-grid">{cards}</div></div>
 </section>
@@ -935,7 +945,7 @@ def build_area_uns():
 <section class="section on-light">
   <div class="wrap layout">
     <article class="prose reveal">
-      <h2>A gardener for the North Shore's bigger gardens</h2>
+      <h2>A gardener North Shore homes can rely on</h2>
       <p>Finding a reliable gardener on the North Shore is a familiar problem. The gardens up here are large, mature and heavily planted, and a lot of mowing services will not touch the hedges or the beds. OneVision Lawns &amp; Gardens is a gardener North Shore homeowners book for the whole property: lawn mowed and edged, hedges kept straight, beds weeded and mulched, and the waste gone at the end of every visit.</p>
       <p>We run regular rounds through the Ku-ring-gai suburbs of Roseville, Lindfield, Killara, Gordon, Pymble, Turramurra, Warrawee, Wahroonga and St Ives, and through Hornsby Shire in Hornsby, Normanhurst, Waitara, Thornleigh, Westleigh, Asquith, Hornsby Heights, Mount Colah and Mount Ku-ring-gai. Every suburb between Roseville and the Hawkesbury is covered.</p>
 
@@ -970,13 +980,8 @@ def build_area_uns():
     </aside>
   </div>
 </section>
-<section class="section on-grey">
-  <div class="wrap">
-    <div class="section-head reveal"><span class="eyebrow">Every suburb</span><h2>Upper North Shore &amp; Hornsby suburbs we cover</h2><p>If your street is in one of these, we come to you.</p></div>
-    <div class="region reveal" style="border:0;background:transparent;padding:0">{chips(UNS)}</div>
-  </div>
-</section>
-{faq_html(UNS_FAQ, eyebrow="North Shore FAQs", title="Questions from North Shore homeowners")}
+{areas_block(light=True, heading="Upper North Shore & Hornsby suburbs we cover", eyebrow="Every suburb", focus="uns", intro="Hover a suburb to find it on the map. Sydney side of the Hawkesbury is the North Shore run; everything north of it is the Central Coast run.")}
+{faq_html(UNS_FAQ, eyebrow="Gardener North Shore FAQs", title="Questions from North Shore homeowners")}
 {contact_section()}
 """ + footer_html()
     write("areas/upper-north-shore/index.html", head(title, meta, path, og_img="/assets/img/area-north-shore.webp", schema=schema) + body)
@@ -998,10 +1003,6 @@ def build_areas_index():
       </div>
       <div class="intro__media reveal" data-d="1"><img src="/assets/img/area-central-coast.webp" alt="Central Coast home with a neatly mown lawn, Norfolk pines and the ocean beyond" loading="lazy" width="1200" height="900"><div class="intro__badge"><b>91</b>Central Coast suburbs</div></div>
     </div>
-    <div class="reveal">
-      <h3 style="font-size:1.3rem">Central Coast suburbs</h3>
-      {chips(CC)}
-    </div>
   </div>
 </section>
 <section class="section on-grey">
@@ -1015,12 +1016,9 @@ def build_areas_index():
         <a href="/areas/upper-north-shore/" class="btn btn--dark">Upper North Shore page {ICONS['arrow']}</a>
       </div>
     </div>
-    <div class="reveal">
-      <h3 style="font-size:1.3rem">Upper North Shore suburbs</h3>
-      {chips(UNS)}
-    </div>
   </div>
 </section>
+{areas_block(light=False, heading="Find your suburb on the map", eyebrow="116 suburbs", intro="Hover a suburb name to light it up on the map, or tap a region to focus it. Both lists are the full set; if your street is in one of them, we come to you.")}
 {cta_strip(title="Not sure if we cover your street?", sub="Call and ask. If it is on the Central Coast or the Upper North Shore, the answer is almost certainly yes.")}
 {contact_section()}
 """ + footer_html()
@@ -1346,10 +1344,23 @@ def resolve_images(content):
         return content
     return re.sub(r"/assets/img/([a-z0-9-]+)\.webp", lambda m: IMAGES.get(m.group(1), m.group(0)), content)
 
+def relativise(rel, content):
+    """Turn root-relative hrefs/srcs into page-relative ones so the site works from any
+    folder, subdirectory host or opened straight from disk. Absolute https URLs are untouched."""
+    depth = rel.count("/")
+    prefix = "../" * depth
+    content = re.sub(r'((?:href|src|action|data-redirect)=")/(?!/)', lambda m: m.group(1) + prefix, content)
+    content = content.replace('href=""', 'href="./"').replace('href="../"' * 0, '')
+    if depth == 0:
+        content = content.replace('href="" ', 'href="./" ')
+    return content
+
 def write(rel, content):
     p = ROOT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     content = resolve_images(content)
+    if rel.endswith(".html"):
+        content = relativise(rel, content)
     with open(p, "w", encoding="utf-8") as f:
         f.write(content)
     print("wrote", rel, f"{len(content)//1024}KB")

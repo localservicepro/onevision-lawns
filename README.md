@@ -24,7 +24,11 @@ python3 build.py
 | `/areas/upper-north-shore/` | gardener north shore |
 | `/areas/`, `/services/`, `/about/`, `/contact/`, `/blog/` + 4 posts, `/thank-you/` (noindex), `/privacy/`, `404.html` | supporting |
 
-Pages are folders with an `index.html` so URLs match the report (`/services/lawn-maintenance`). Host on anything static (Netlify, Vercel, Cloudflare Pages, GHL custom hosting, cPanel). Point 404s at `404.html`.
+Pages are folders with an `index.html` so URLs match the report (`/services/lawn-maintenance`). All asset and link paths are page-relative, so the site works from the domain root, a subfolder, or opened straight from disk (double-click `index.html`; folder links and the form redirect resolve to the right `index.html`). Host on anything static (Netlify, Vercel, Cloudflare Pages, GHL custom hosting, cPanel). Point 404s at `404.html`.
+
+## Areas map
+
+`areamap.py` draws the service-area map as inline SVG from approximate suburb centroids (coastline draws itself, suburb dots pop in, a marker runs the M1 between the regions, hovering a suburb name lights its dot, the legend focuses a region). The full suburb lists stay in the page as text inside collapsible `<details>` blocks so the local-SEO signal from the report is unchanged.
 
 ## Brand
 
@@ -47,7 +51,7 @@ Every quote form (`form.quote-form`) posts these field names, which map 1:1 to t
 | `service_needed` | `{{contact.service_needed}}` |
 | `job_notes` | `{{contact.job_notes}}` |
 
-The GHL external tracking script (`tk_5c1ff04a744b42bb929155e4cb46b534`) is loaded in the `<head>` of every page and captures the submit event. There is no form endpoint: on submit the site lets the tracking script see the submission, pushes a `quote_form_submit` event to `dataLayer`, then redirects to `/thank-you/` after ~450ms. A honeypot field (`company`) blocks basic bots.
+The GHL external tracking script (`tk_5c1ff04a744b42bb929155e4cb46b534`) is loaded in the `<head>` of every page and captures the submit event. There is no form endpoint: the site's submit handler runs in the capture phase (so no third-party listener can swallow it), lets the tracking script's own listener see the submission, pushes a `quote_form_submit` event to `dataLayer`, then redirects to the thank-you page after 500ms. A honeypot field (`company`) blocks basic bots.
 
 ## QA
 

@@ -108,15 +108,25 @@
     });
   });
 
-  /* ---- quote forms: let the CRM tracking script see the submit, then redirect ---- */
+  /* ---- quote forms: let the CRM tracking script see the submit, then go to the thank-you page ---- */
+  var isFile = window.location.protocol === 'file:';
+  function resolveTarget(t) {
+    var u = new URL(t || 'thank-you/', window.location.href);
+    if (isFile && /\/$/.test(u.pathname)) u = new URL(u.href + 'index.html');
+    return u.href;
+  }
   document.querySelectorAll('form.quote-form').forEach(function (form) {
     form.addEventListener('submit', function (e) {
+      // Capture phase: runs before any third-party submit listener and cannot be swallowed by one.
       e.preventDefault();
-      if (form.querySelector('.hp input') && form.querySelector('.hp input').value) return; // honeypot
+      var hp = form.querySelector('.hp input');
+      if (hp && hp.value) return;
       if (!form.checkValidity()) { form.reportValidity(); return; }
+      if (form.dataset.sending) return;
+      form.dataset.sending = '1';
       form.classList.add('is-sending');
       var btn = form.querySelector('button[type="submit"]');
-      if (btn) btn.textContent = 'Sending…';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       try {
         var data = {};
         new FormData(form).forEach(function (v, k) { data[k] = v; });
@@ -124,11 +134,21 @@
         window.dataLayer.push({ event: 'quote_form_submit', form_id: form.id || 'quote-form', service_needed: data.service_needed || '' });
         try { sessionStorage.setItem('ov_last_enquiry', JSON.stringify(data)); } catch (err) {}
       } catch (err) {}
-      var target = form.getAttribute('data-redirect') || '/thank-you/';
-      // Give the external tracking script's listener a beat to fire its beacon before we leave.
-      window.setTimeout(function () { window.location.assign(target); }, 450);
-    });
+      var target = resolveTarget(form.getAttribute('data-redirect'));
+      // Give the tracking script's own listener (it fires after this one) a beat to send its beacon.
+      window.setTimeout(function () { window.location.assign(target); }, 500);
+    }, true);
   });
+
+  /* ---- opened straight from disk: make folder links land on their index.html ---- */
+  if (isFile) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (!h || /^(https?:|mailto:|tel:|#)/.test(h)) return;
+      var u = new URL(h, window.location.href);
+      if (/\/$/.test(u.pathname)) a.setAttribute('href', u.pathname + 'index.html' + u.hash);
+    });
+  }
 
   /* ---- hero video: only play when it can, fall back to poster ---- */
   var v = document.querySelector('.hero__media video');
@@ -139,4 +159,58 @@
 
   /* ---- current year ---- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+})();
+
+/* ---------- Area map: hover sync, tooltip, region focus ---------- */
+(function () {
+  document.querySelectorAll('.areas-layout').forEach(function (wrap) {
+    var map = wrap.querySelector('.area-map');
+    if (!map) return;
+    var tip = map.querySelector('.am-tip');
+    var dots = {};
+    map.querySelectorAll('.am-dot').forEach(function (d) { dots[d.getAttribute('data-suburb')] = d; });
+    function hot(name, on) {
+      var d = dots[name]; if (!d) return;
+      d.classList.toggle('is-hot', on);
+      if (tip) {
+        if (on) {
+          var c = d.querySelector('circle:last-of-type');
+          var r = map.getBoundingClientRect(), b = c.getBoundingClientRect();
+          tip.textContent = name;
+          tip.style.left = (b.left - r.left + b.width / 2) + 'px';
+          tip.style.top = (b.top - r.top) + 'px';
+          tip.classList.add('show');
+        } else tip.classList.remove('show');
+      }
+    }
+    Object.keys(dots).forEach(function (name) {
+      dots[name].addEventListener('mouseenter', function () { hot(name, true); });
+      dots[name].addEventListener('mouseleave', function () { hot(name, false); });
+    });
+    wrap.querySelectorAll('[data-suburb-ref]').forEach(function (li) {
+      li.addEventListener('mouseenter', function () { hot(li.getAttribute('data-suburb-ref'), true); });
+      li.addEventListener('mouseleave', function () { hot(li.getAttribute('data-suburb-ref'), false); });
+    });
+    var cards = wrap.querySelectorAll('.region-card[data-region]');
+    var btns = wrap.querySelectorAll('.am-legend button[data-region]');
+    function focus(region) {
+      map.classList.remove('am-focus-uns', 'am-focus-cc');
+      if (region) map.classList.add('am-focus-' + region);
+      cards.forEach(function (c) { c.classList.toggle('is-active', c.getAttribute('data-region') === region); });
+      btns.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-region') === region); });
+    }
+    if (window.matchMedia('(hover: hover)').matches) {
+      cards.forEach(function (c) {
+        c.addEventListener('mouseenter', function () { focus(c.getAttribute('data-region')); });
+        c.addEventListener('mouseleave', function () { focus(map.getAttribute('data-default-focus') || null); });
+      });
+    }
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var r = b.getAttribute('data-region');
+        var already = map.classList.contains('am-focus-' + r);
+        focus(already ? null : r);
+      });
+    });
+  });
 })();
