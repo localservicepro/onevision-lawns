@@ -116,6 +116,13 @@ strong{font-weight:700}
   border-bottom:1px solid transparent;
   color:var(--white);
 }
+/* soft fade behind the nav while it sits over the hero photo, so links stay readable without a hard band */
+.site-header::before{
+  content:"";position:absolute;inset:0 0 -40px 0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(10,10,10,.62) 0%,rgba(10,10,10,.28) 60%,rgba(10,10,10,0) 100%);
+  transition:opacity .3s;
+}
+.site-header.scrolled::before,.site-header.solid::before{opacity:0}
 .site-header.scrolled,.site-header.solid{
   background:rgba(10,10,10,.86);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -220,8 +227,8 @@ strong{font-weight:700}
   position:relative;min-height:100svh;display:flex;align-items:center;color:var(--white);
   padding:calc(var(--header-h) + 56px) 0 72px;overflow:hidden;isolation:isolate;
 }
-.hero__media{position:absolute;inset:0;z-index:-2;background:radial-gradient(120% 80% at 80% 20%,rgba(106,192,62,.28),transparent 60%),linear-gradient(160deg,#101510,#0a0a0a)}
-.hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform;color:transparent;font-size:0}
+.hero__media{position:absolute;inset:0 0 -18% 0;z-index:-2;will-change:transform;background:radial-gradient(120% 80% at 80% 20%,rgba(106,192,62,.28),transparent 60%),linear-gradient(160deg,#101510,#0a0a0a)}
+.hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;object-position:center 35%;color:transparent;font-size:0}
 .hero__scrim{
   position:absolute;inset:0;z-index:-1;
   background:
@@ -270,7 +277,7 @@ strong{font-weight:700}
   .hero{min-height:0;padding-top:calc(var(--header-h) + 36px)}
   .hero__grid{grid-template-columns:1fr;gap:36px}
   .hero h1{max-width:none}
-  .hero__scrim{background:linear-gradient(180deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,.85) 100%)}
+  .hero__scrim{background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.68) 30%,rgba(10,10,10,.82) 60%,rgba(10,10,10,.96) 100%)}
   .scroll-cue{display:none}
 }
 
@@ -640,3 +647,81 @@ strong{font-weight:700}
 .on-dark .region-card{background:var(--ink-2);border-color:var(--line)}
 @media (max-width:960px){.areas-layout{grid-template-columns:1fr}.area-map{max-width:520px;aspect-ratio:7/9}}
 @media (max-width:560px){.region-card details .suburbs{columns:2}}
+
+
+/* ==========================================================================
+   Responsive pass: tablet + mobile
+   ========================================================================== */
+/* tighter desktop nav between 961px and 1200px so links, phone and CTA never collide */
+@media (max-width:1200px) and (min-width:961px){
+  .nav-inner{gap:18px}
+  .nav-link{padding:10px 10px;font-size:.9rem}
+  .nav-link::after{left:10px;right:10px}
+  .brand span{display:none}
+  .nav-phone span.ph-txt{display:none}
+  .nav-actions{gap:10px}
+}
+@media (max-width:1100px) and (min-width:961px){
+  .hero__grid{grid-template-columns:minmax(0,1fr) minmax(400px,.95fr);gap:36px}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.2rem)}
+}
+@media (max-width:960px){
+  :root{--header-h:68px}
+  .nav-inner{gap:12px;width:calc(100% - 32px)}
+  .brand img{width:46px;height:46px}
+  .brand span{font-size:.85rem}
+  .nav-actions{margin-left:auto;gap:10px}
+  .nav-actions .btn{padding:10px 16px;font-size:.8rem;box-shadow:0 6px 18px rgba(106,192,62,.25)}
+  .nav-burger{width:44px;height:44px}
+  .mobile-nav{padding:16px 20px 48px}
+  .mobile-nav a,.mobile-nav button{font-size:1.15rem;padding:15px 4px}
+
+  .hero{padding:calc(var(--header-h) + 32px) 0 56px}
+  .hero__grid{gap:32px}
+  .hero .lede{font-size:1.05rem;margin-bottom:26px}
+  .hero__cta{margin-bottom:28px}
+  .page-hero{min-height:0;padding:calc(var(--header-h) + 44px) 0 56px}
+  .page-hero .lede{font-size:1.02rem}
+
+  .section-head{margin-bottom:36px}
+  .intro{gap:28px}
+  .contact{gap:32px}
+  .faq{gap:24px}
+}
+@media (max-width:600px){
+  h1{font-size:clamp(2.05rem,9vw,2.6rem)}
+  h2{font-size:clamp(1.65rem,7vw,2.1rem)}
+  .page-hero h1{font-size:clamp(1.9rem,8.4vw,2.4rem)}
+  .lede{font-size:1.02rem}
+  .section{padding:64px 0}
+  .section--tight{padding:48px 0}
+  .section-head p{font-size:1rem}
+
+  .hero__cta{flex-direction:column;align-items:stretch;gap:14px}
+  .hero__cta .btn{width:100%}
+  .hero__phone{align-self:flex-start}
+  .hero .trust{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;font-size:.84rem}
+  .hero__card{padding:24px 18px;border-radius:18px}
+  .form-card{padding:26px 18px;border-radius:18px}
+
+  .btn{padding:15px 22px}
+  .tile,.step,.region-card{padding:24px 20px}
+  .svc-card__body{padding:20px 20px 22px}
+  .proof-card,.score{padding:28px 22px}
+  .score .big{font-size:4rem}
+  .info-row{padding:16px}
+  .cta-strip .wrap{padding:44px 0}
+  .cta-strip .actions{width:100%}
+  .cta-strip .actions .btn{flex:1 1 100%}
+  .band{height:38vh;min-height:240px}
+  .marquee__track span{font-size:.78rem;padding:0 16px;gap:16px}
+  .footer-grid{gap:28px}
+  .site-footer{padding-top:56px}
+  .aside-card{padding:24px 20px}
+  .mini-grid{margin:24px 0}
+}
+@media (max-width:380px){
+  .nav-actions .btn{padding:9px 12px;font-size:.74rem}
+  .brand img{width:42px;height:42px}
+  .hero .trust{grid-template-columns:1fr}
+}

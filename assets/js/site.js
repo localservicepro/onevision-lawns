@@ -67,17 +67,22 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* ---- parallax (hero media + macro band), rAF throttled ---- */
+  /* ---- parallax (hero media + macro band), rAF throttled ----
+     Heroes: offset grows with scroll from 0, so the photo always starts flush with the top.
+     Band:   offset measured from the band's own container, never from the moving element. */
   var px = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-  if (px.length && !reduce && window.matchMedia('(hover: hover)').matches) {
+  if (px.length && !reduce && window.matchMedia('(hover: hover) and (min-width: 961px)').matches) {
     var ticking = false;
     var update = function () {
-      var vh = window.innerHeight;
+      var vh = window.innerHeight, sy = window.scrollY;
       px.forEach(function (el) {
-        var r = el.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) return;
         var speed = parseFloat(el.getAttribute('data-parallax')) || 0.2;
-        var offset = (r.top + r.height / 2 - vh / 2) * speed;
+        var host = el.closest('.hero, .page-hero, .band') || el.parentElement;
+        var r = host.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var offset = host.classList.contains('band')
+          ? (r.top + r.height / 2 - vh / 2) * speed
+          : Math.max(0, -r.top) * speed;
         el.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0)';
       });
       ticking = false;

@@ -251,7 +251,7 @@ def header_html(active="", solid=False):
       {nl('/contact/', 'Contact', 'contact')}
     </nav>
     <div class="nav-actions">
-      <a href="tel:{PHONE_RAW}" class="nav-phone">{ICONS['phone']}{PHONE}</a>
+      <a href="tel:{PHONE_RAW}" class="nav-phone" aria-label="Call {PHONE}">{ICONS['phone']}<span class="ph-txt">{PHONE}</span></a>
       <a href="/contact/#quote" class="btn btn--primary">{CTA}</a>
     </div>
     <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
@@ -417,7 +417,7 @@ def areas_block(light=True, heading="Areas we service", eyebrow="Two regions, 11
 def page_hero(h1, lede, crumbs, img, alt, eyebrow=None):
     eb = f'<span class="eyebrow fadeup">{eyebrow}</span>' if eyebrow else ""
     return f"""<section class="page-hero">
-  <div class="hero__media"><img src="/assets/img/{img}" alt="{esc(alt)}" width="1600" height="900" fetchpriority="high" data-parallax="0.18"></div>
+  <div class="hero__media" data-parallax="0.18"><img src="/assets/img/{img}" alt="{esc(alt)}" width="1600" height="900" fetchpriority="high"></div>
   <div class="hero__scrim"></div>
   <div class="wrap">
     <div class="fadeup">{crumbs_html(crumbs)}</div>
@@ -515,10 +515,10 @@ def build_home():
         <a href="tel:{PHONE_RAW}" class="hero__phone">{ICONS['phone']}{PHONE}</a>
       </div>
       <ul class="trust fadeup" data-d="4">
-        <li>{ICONS['check']} 5.0 rated on Google</li>
-        <li>{ICONS['check']} Free quotes, no lock-in</li>
+        <li>{ICONS['check']} 5.0 on Google</li>
+        <li>{ICONS['check']} Free quotes</li>
+        <li>{ICONS['check']} No lock-in</li>
         <li>{ICONS['check']} Owner operated</li>
-        <li>{ICONS['check']} 116 suburbs covered</li>
       </ul>
     </div>
     <div class="hero__card fadeup" data-d="3" id="quote-hero">
