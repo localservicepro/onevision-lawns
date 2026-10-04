@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Static site generator for OneVision Lawns & Gardens.
+Static site generator for ONEVISION LAWNS & GARDENS.
 
     python3 build.py
 
@@ -17,10 +17,10 @@ ROOT = Path(__file__).parent
 # ---------------------------------------------------------------------------
 # Business config
 # ---------------------------------------------------------------------------
-BUSINESS = "OneVision Lawns & Gardens"
+BUSINESS = "ONEVISION LAWNS & GARDENS"
 OWNER = "Lachlan Donohoe"
-PHONE = "0497 209 276"
-PHONE_RAW = "+61497209276"
+PHONE = "0408 595 570"
+PHONE_RAW = "+61408595570"
 EMAIL = "onevisionlawnsgardens@gmail.com"
 ADDRESS = {"street": "45 Braeside Road", "suburb": "Greystanes", "state": "NSW", "postcode": "2145"}
 GMB = "https://share.google/zm2cHQuHjUxuBLEnU"
@@ -90,43 +90,43 @@ SERVICES = [
   "dd":"Hornsby & the Upper North Shore","card":"Regular mowing, edging and lawn care for Hornsby, Wahroonga, Turramurra and the Central Coast. Fortnightly or as needed.",
   "kw":"lawn mowing hornsby",
   "h1":"Lawn Mowing Hornsby & the Upper North Shore",
-  "title":"Lawn Mowing Hornsby & Upper North Shore | OneVision Lawns",
-  "meta":"Lawn mowing Hornsby and the Upper North Shore. Regular mowing, edging and lawn care from Roseville to Mount Ku-ring-gai. Free quotes from OneVision Lawns.",
+  "title":"Lawn Mowing Hornsby & Upper North Shore | ONEVISION LAWNS",
+  "meta":"Lawn mowing Hornsby and the Upper North Shore. Regular mowing, edging and lawn care from Roseville to Mount Ku-ring-gai. Free quotes from ONEVISION LAWNS.",
   "audience":"Homeowners, landlords and strata"},
  {"slug":"garden-maintenance","name":"Garden Maintenance","short":"Garden Care","icon":"leaf","img":"garden-maintenance.webp",
   "dd":"Central Coast & North Shore","card":"Pruning, weeding, mulching and bed care on a regular schedule, so the garden stays tidy without you lifting a finger.",
   "kw":"garden maintenance central coast",
   "h1":"Garden Maintenance Central Coast: Regular Gardeners You Can Book",
-  "title":"Garden Maintenance Central Coast | Gardeners | OneVision",
-  "meta":"Garden maintenance Central Coast. Regular gardeners for pruning, weeding, mulching and bed care from Woy Woy to Wyong. Book a free quote with OneVision.",
+  "title":"Garden Maintenance Central Coast | Gardeners | ONEVISION",
+  "meta":"Garden maintenance Central Coast. Regular gardeners for pruning, weeding, mulching and bed care from Woy Woy to Wyong. Book a free quote with ONEVISION.",
   "audience":"Busy households, retirees and holiday-home owners"},
  {"slug":"turf-installation","name":"Turf Installation","short":"New Turf","icon":"turf","img":"turf-installation.webp",
   "dd":"Gosford, Terrigal, Erina & beyond","card":"Old lawn out, ground prepared, new turf laid and rolled. Buffalo, couch and kikuyu suited to coastal and North Shore blocks.",
   "kw":"turf laying central coast",
   "h1":"Turf Laying Central Coast: Professional Turf Installation",
-  "title":"Turf Laying Central Coast NSW | OneVision Lawns & Gardens",
-  "meta":"Turf laying Central Coast NSW. Site preparation, soil, levelling and new turf installation in Gosford, Terrigal, Erina and Wyong. Free quotes from OneVision.",
+  "title":"Turf Laying Central Coast NSW | ONEVISION LAWNS & GARDENS",
+  "meta":"Turf laying Central Coast NSW. Site preparation, soil, levelling and new turf in Gosford, Terrigal, Erina and Wyong. Free quotes from ONEVISION.",
   "audience":"New builds, renovators and lawn replacements"},
  {"slug":"hedge-trimming","name":"Hedge Trimming","short":"Hedges","icon":"shears","img":"hedge-trimming.webp",
   "dd":"Wahroonga, St Ives & the North Shore","card":"Straight tops, clean faces and shaped feature hedges, with every clipping cleared away before we leave.",
   "kw":"hedge trimming north shore",
   "h1":"Hedge Trimming North Shore: Neat Hedges for Upper North Shore Homes",
-  "title":"Hedge Trimming North Shore | OneVision Lawns & Gardens",
-  "meta":"Hedge trimming North Shore. Neat, shaped hedges for Upper North Shore homes in Wahroonga, St Ives, Turramurra and Pymble. Free quotes from OneVision.",
+  "title":"Hedge Trimming North Shore | ONEVISION LAWNS & GARDENS",
+  "meta":"Hedge trimming North Shore. Neat, shaped hedges for Upper North Shore homes in Wahroonga, St Ives, Turramurra and Pymble. Free quotes from ONEVISION.",
   "audience":"Established-garden homeowners"},
  {"slug":"garden-clean-ups","name":"Clean Ups","short":"Garden Clean Ups","icon":"broom","img":"clean-ups.webp",
   "dd":"Pre-sale, end of lease & overgrown yards","card":"One-off garden clean ups that bring an overgrown yard back to tidy in a day, with all green waste removed.",
   "kw":"garden clean up central coast",
   "h1":"Garden Clean Up Central Coast: Overgrown Yards Brought Back",
-  "title":"Garden Clean Up Central Coast | OneVision Lawns & Gardens",
-  "meta":"Garden clean up Central Coast. One-off clean ups for overgrown yards, pre-sale tidies and end of lease from Woy Woy to Wyong. Free quotes from OneVision.",
+  "title":"Garden Clean Up Central Coast | ONEVISION LAWNS & GARDENS",
+  "meta":"Garden clean up Central Coast. One-off clean ups for overgrown yards, pre-sale tidies and end of lease from Woy Woy to Wyong. Free quotes from ONEVISION.",
   "audience":"Pre-sale, end of lease and neglected yards"},
  {"slug":"weed-control","name":"Weed Control","short":"Weed Control","icon":"spray","img":"weed-control.webp",
   "dd":"Lawns, garden beds & paths","card":"Targeted weed treatment for lawns, garden beds, driveways and paths, followed up so the weeds stay gone.",
   "kw":"weed control central coast",
   "h1":"Weed Control Central Coast for Lawns, Garden Beds & Paths",
-  "title":"Weed Control Central Coast | OneVision Lawns & Gardens",
-  "meta":"Weed control Central Coast for lawns, garden beds, driveways and paths. Targeted treatment and follow-up from Gosford to The Entrance. Free quotes from OneVision.",
+  "title":"Weed Control Central Coast | ONEVISION LAWNS & GARDENS",
+  "meta":"Weed control Central Coast for lawns, garden beds, driveways and paths. Targeted treatment and follow-up from Gosford to The Entrance. Free quotes.",
   "audience":"Homeowners with lawn weeds, driveways and paths"},
 ]
 SVC_BY = {s["slug"]: s for s in SERVICES}
@@ -238,7 +238,7 @@ def header_html(active="", solid=False):
     cls = "site-header solid" if solid else "site-header"
     return f"""<header class="{cls}" id="top">
   <div class="nav-inner">
-    <a href="/" class="brand" aria-label="{esc(BUSINESS)} home"><img src="/assets/img/logo.png" width="56" height="56" alt="{esc(BUSINESS)} logo"><span>OneVision<small>Lawns &amp; Gardens</small></span></a>
+    <a href="/" class="brand" aria-label="{esc(BUSINESS)} home"><img src="/assets/img/logo.png" width="56" height="56" alt="{esc(BUSINESS)} logo"><span>ONEVISION<small>LAWNS &amp; GARDENS</small></span></a>
     <nav class="nav-main" aria-label="Main navigation">
       {nl('/', 'Home', 'home')}
       <div class="nav-dropdown">
@@ -289,8 +289,8 @@ def footer_html():
           <span>Mon to Sat, from 6am</span>
         </div>
         <div class="footer-social">
-          <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="OneVision on Facebook">{ICONS['fb']}</a>
-          <a href="{GMB}" target="_blank" rel="noopener" aria-label="OneVision on Google">{ICONS['google']}</a>
+          <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="ONEVISION on Facebook">{ICONS['fb']}</a>
+          <a href="{GMB}" target="_blank" rel="noopener" aria-label="ONEVISION on Google">{ICONS['google']}</a>
         </div>
       </div>
       <div>
@@ -300,7 +300,7 @@ def footer_html():
       <div>
         <h4>Company</h4>
         <ul>
-          <li><a href="/about/">About OneVision</a></li>
+          <li><a href="/about/">About ONEVISION</a></li>
           <li><a href="/areas/">Areas we service</a></li>
           <li><a href="/areas/upper-north-shore/">Upper North Shore</a></li>
           <li><a href="/blog/">Lawn &amp; garden blog</a></li>
@@ -402,7 +402,7 @@ def areas_block(light=True, heading="Areas we service", eyebrow="Two regions, 11
     <div class="section-head reveal">
       <span class="eyebrow">{esc(eyebrow)}</span>
       <h2>{esc(heading)}</h2>
-      <p>{intro or "OneVision works two regions: Sydney's Upper North Shore and Hornsby, and the Central Coast from the Peninsula up to Lake Macquarie's southern edge. Hover a suburb to find it on the map."}</p>
+      <p>{intro or "ONEVISION works two regions: Sydney's Upper North Shore and Hornsby, and the Central Coast from the Peninsula up to Lake Macquarie's southern edge. Hover a suburb to find it on the map."}</p>
     </div>
     <div class="areas-layout">
       <div class="reveal">{m}</div>
@@ -484,15 +484,15 @@ HOME_FAQ = [
 ]
 
 def build_home():
-    title = "Lawn Mowing Central Coast & North Shore | OneVision Lawns"
-    meta = "Lawn mowing Central Coast and Upper North Shore. OneVision Lawns & Gardens handles mowing, garden care, hedges and new turf. Call for a free quote today."
+    title = "Lawn Mowing Central Coast & North Shore | ONEVISION LAWNS"
+    meta = "Lawn mowing Central Coast and Upper North Shore. ONEVISION LAWNS & GARDENS handles mowing, garden care, hedges and new turf. Call for a free quote today."
     schema = [local_business(), {"@type": "WebSite", "@id": SITE_URL + "/#website", "url": SITE_URL + "/", "name": BUSINESS, "publisher": {"@id": SITE_URL + "/#business"}},
               {"@type": "WebPage", "@id": SITE_URL + "/#webpage", "url": SITE_URL + "/", "name": title, "isPartOf": {"@id": SITE_URL + "/#website"}, "about": {"@id": SITE_URL + "/#business"}},
               faq_schema(HOME_FAQ), breadcrumbs([("Home", "/")])]
     svc_cards = ""
     for i, s in enumerate(SERVICES):
         svc_cards += f"""<a href="{svc_url(s['slug'])}" class="svc-card reveal" data-d="{i%3}">
-  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} on the Central Coast and Upper North Shore by OneVision Lawns &amp; Gardens" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
+  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} on the Central Coast and Upper North Shore by ONEVISION LAWNS &amp; GARDENS" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
   <div class="svc-card__body"><span class="icon">{ICONS[s['icon']]}</span><h3>{esc(s['name'])}</h3><p>{esc(s['card'])}</p><span class="link-arrow">{esc(s['dd'])} {ICONS['arrow']}</span></div>
 </a>"""
     marquee = "".join(f"<span>{esc(x)}</span>" for x in ["Lawn mowing", "Garden maintenance", "Turf installation", "Hedge trimming", "Garden clean ups", "Weed control", "Central Coast", "Upper North Shore", "Hornsby", "Gosford", "Terrigal", "Wahroonga", "St Ives", "Wyong", "Woy Woy", "Turramurra"])
@@ -502,14 +502,14 @@ def build_home():
     <video autoplay muted loop playsinline preload="metadata" poster="/assets/img/hero.webp" aria-hidden="true">
       <source src="{HERO_VIDEO_URL}" type="video/mp4">
     </video>
-    <img src="/assets/img/hero.webp" alt="Freshly mown striped lawn in front of a Central Coast home, cut by OneVision Lawns &amp; Gardens" width="1600" height="900" fetchpriority="high" style="position:absolute;inset:0;z-index:-1">
+    <img src="/assets/img/hero.webp" alt="Freshly mown striped lawn in front of a Central Coast home, cut by ONEVISION LAWNS &amp; GARDENS" width="1600" height="900" fetchpriority="high" style="position:absolute;inset:0;z-index:-1">
   </div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__grid">
     <div>
       <span class="eyebrow fadeup">Central Coast &middot; Upper North Shore</span>
       <h1 class="fadeup" data-d="1">Lawn Mowing Central Coast &amp; Upper North Shore, <span class="accent">Done Properly</span></h1>
-      <p class="lede fadeup" data-d="2">OneVision Lawns &amp; Gardens mows, edges, trims, weeds and lays new turf for homes from Woy Woy to Wyong and Roseville to Mount Ku-ring-gai. Free quotes, one number to call, and the same person turning up each time.</p>
+      <p class="lede fadeup" data-d="2">ONEVISION LAWNS &amp; GARDENS mows, edges, trims, weeds and lays new turf for homes from Woy Woy to Wyong and Roseville to Mount Ku-ring-gai. Free quotes, one number to call, and the same person turning up each time.</p>
       <div class="hero__cta fadeup" data-d="3">
         <a href="#quote-hero" class="btn btn--primary">{CTA} {ICONS['arrow']}</a>
         <a href="tel:{PHONE_RAW}" class="hero__phone">{ICONS['phone']}{PHONE}</a>
@@ -535,17 +535,17 @@ def build_home():
     <div class="reveal">
       <span class="eyebrow">Lawn &amp; garden care, two regions</span>
       <h2>Reliable lawn mowing on the Central Coast, and proper garden care on the North Shore</h2>
-      <p class="lede">OneVision Lawns &amp; Gardens is an owner-operated lawn mowing and garden maintenance business working the Central Coast and Sydney's Upper North Shore. Lawn mowing Central Coast customers get the same thing Hornsby and Wahroonga customers get: a tidy, edged lawn on a schedule you set, and a garden that gets looked after instead of just cut.</p>
+      <p class="lede">ONEVISION LAWNS &amp; GARDENS is an owner-operated lawn mowing and garden maintenance business working the Central Coast and Sydney's Upper North Shore. Lawn mowing Central Coast customers get the same thing Hornsby and Wahroonga customers get: a tidy, edged lawn on a schedule you set, and a garden that gets looked after instead of just cut.</p>
       <p>Whether it is a fortnightly mow in Terrigal, a hedge in Pymble, a pre-sale clean up in Umina Beach or a new lawn in Gosford, you deal with {OWNER.split()[0]} directly. Both regions get the same crew and the same standard. No call centre, no franchise fees built into the price, and no chasing anyone to find out when they are coming.</p>
       <ul class="checks">
         <li>{ICONS['check']} Mowing, edging and whipper snipping every visit, with clippings taken away</li>
         <li>{ICONS['check']} Fortnightly, monthly or one-off. You set the schedule and we keep it</li>
         <li>{ICONS['check']} Quoted up front, priced on your lawn, not a template</li>
       </ul>
-      <a href="/about/" class="link-arrow" style="margin-top:26px">More about OneVision {ICONS['arrow']}</a>
+      <a href="/about/" class="link-arrow" style="margin-top:26px">More about ONEVISION {ICONS['arrow']}</a>
     </div>
     <div class="intro__media reveal" data-d="1">
-      <img src="/assets/img/about-ute.webp" alt="OneVision Lawns &amp; Gardens work ute and trailer loaded with mowers on a leafy suburban street" loading="lazy" width="1200" height="900">
+      <img src="/assets/img/about-ute.webp" alt="ONEVISION LAWNS &amp; GARDENS work ute and trailer loaded with mowers on a leafy suburban street" loading="lazy" width="1200" height="900">
       <div class="intro__badge"><b>5.0</b>Google rating</div>
     </div>
   </div>
@@ -565,7 +565,7 @@ def build_home():
 <section class="section on-grey" id="why">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow">Why OneVision</span>
+      <span class="eyebrow">Why ONEVISION</span>
       <h2>What a lawn mowing service on the Central Coast should actually be</h2>
       <p>Two of the three businesses in the Central Coast map results do not even have a website. Plenty more will not answer the phone. Here is the standard we hold ourselves to instead.</p>
     </div>
@@ -637,7 +637,7 @@ SERVICE_BODIES = {
  "img": "lawn-mowing.webp", "alt": "Lawn mower cutting clean stripes on a buffalo lawn in Hornsby",
  "body": f"""
 <h2>Lawn mowing in Hornsby that turns up when it says it will</h2>
-<p>Lawn mowing Hornsby customers book with OneVision for one reason: it gets done, properly, on the day we said. Hornsby and the Upper North Shore have big blocks, shaded lawns under gums and buffalo that grows a foot in a wet fortnight. A quick pass with a mower does not cut it, so ours is a full lawn maintenance visit every time.</p>
+<p>Lawn mowing Hornsby customers book with ONEVISION for one reason: it gets done, properly, on the day we said. Hornsby and the Upper North Shore have big blocks, shaded lawns under gums and buffalo that grows a foot in a wet fortnight. A quick pass with a mower does not cut it, so ours is a full lawn maintenance visit every time.</p>
 <p>Each lawn mowing Hornsby visit includes mowing to the right height for your grass type, edging along paths, driveways and garden beds, whipper snipping around trees, fences and retaining walls, and blowing down hard surfaces so nothing is left behind. Clippings are caught and removed unless you prefer them mulched back in.</p>
 
 <h2>What is included in a lawn mowing Hornsby visit</h2>
@@ -672,7 +672,7 @@ SERVICE_BODIES = {
   ("How much does lawn mowing cost in Hornsby?", "Lawn mowing in Hornsby is priced on the size of the lawn, how overgrown it is, access and how often you book. Fortnightly regulars pay less per visit than one-off cuts. Send us the address and a rough size and we will quote it, usually the same day, with the price confirmed before we start."),
   ("How often should I have my lawn mowed on the Upper North Shore?", "Fortnightly from September to March, and every three to four weeks through winter. Buffalo lawns in shaded Upper North Shore gardens can stretch further in the cooler months. We adjust the schedule with the season so the lawn is never scalped or left to get away."),
   ("Do you take the grass clippings away?", "Yes. Clippings and any whipper snipping debris are removed from the property at the end of every visit. If you would rather have the clippings mulched back into the lawn as a feed, just say so when you book."),
-  ("Do you mow lawns on the Central Coast as well?", "Yes. OneVision covers both the Upper North Shore and the Central Coast, from Woy Woy through Gosford and Terrigal to Wyong and Toukley. Lawn mowing across both regions is run on the same schedule system, so a holiday home and a family home can be looked after by the same crew."),
+  ("Do you mow lawns on the Central Coast as well?", "Yes. ONEVISION covers both the Upper North Shore and the Central Coast, from Woy Woy through Gosford and Terrigal to Wyong and Toukley. Lawn mowing across both regions is run on the same schedule system, so a holiday home and a family home can be looked after by the same crew."),
   ("Can you handle strata and rental properties?", "Yes. We look after lawns for landlords, property managers and small strata blocks across Hornsby and the Upper North Shore. We can invoice the agent directly and send a photo when each visit is done."),
  ]},
 "garden-maintenance": {
@@ -680,7 +680,7 @@ SERVICE_BODIES = {
  "img": "garden-maintenance.webp", "alt": "Neatly mulched garden bed with trimmed native shrubs on the Central Coast",
  "body": f"""
 <h2>Garden maintenance Central Coast homeowners can actually book</h2>
-<p>Finding a gardener on the Central Coast who turns up regularly is harder than it should be. OneVision offers proper garden maintenance Central Coast wide: a fortnightly or monthly visit that keeps the whole garden in order, not a once-a-year blitz. Beds weeded, shrubs pruned, hedges kept in shape, lawns mowed and edged, and the waste taken away.</p>
+<p>Finding a gardener on the Central Coast who turns up regularly is harder than it should be. ONEVISION offers proper garden maintenance Central Coast wide: a fortnightly or monthly visit that keeps the whole garden in order, not a once-a-year blitz. Beds weeded, shrubs pruned, hedges kept in shape, lawns mowed and edged, and the waste taken away.</p>
 <p>The Central Coast is a different gardening environment to Sydney. Sandy soils on the Peninsula, salt wind in Terrigal, Avoca and Wamberal, heavy clay around Wyong and dense bushland gardens in Kariong, Somersby and Mangrove Mountain. We adjust what we do and when we do it to the block in front of us.</p>
 
 <h2>What regular garden maintenance Central Coast visits cover</h2>
@@ -714,14 +714,14 @@ SERVICE_BODIES = {
   ("What is included in a regular gardening visit?", "A standard visit covers weeding, pruning, hedge upkeep, mulching as needed, lawn mowing and edging, and removal of all green waste. Seasonal jobs like fertilising and cutting back perennials are worked in through the year. You can add or remove tasks at any time."),
   ("How often should a Central Coast garden be maintained?", "Most Central Coast gardens do best on a fortnightly visit from September to March and monthly through winter. Coastal gardens with fast-growing hedges and buffalo lawns need the fortnightly rhythm in summer. Low-maintenance native gardens can often stretch to monthly all year."),
   ("Do you look after holiday homes and rentals?", "Yes. A lot of our Central Coast garden maintenance customers own holiday homes in Terrigal, Avoca, Killcare and Pearl Beach, or rentals managed by an agent. We keep the property presentable between guests or tenants, invoice whoever you nominate and can send photos after each visit."),
-  ("Is OneVision a gardener or a lawn mowing business?", "Both. OneVision Lawns & Gardens does full garden maintenance as well as lawn mowing, hedge trimming, clean ups, weed control and turf installation. Most regular customers have us do the lawn and the garden on the same visit, which works out cheaper than booking two separate trades."),
+  ("Is ONEVISION a gardener or a lawn mowing business?", "Both. ONEVISION LAWNS & GARDENS does full garden maintenance as well as lawn mowing, hedge trimming, clean ups, weed control and turf installation. Most regular customers have us do the lawn and the garden on the same visit, which works out cheaper than booking two separate trades."),
  ]},
 "turf-installation": {
  "lede": "New lawns laid properly across the Central Coast: old turf removed, soil prepared and levelled, the right variety chosen for your block and rolled in so it takes. Gosford, Terrigal, Erina, Wyong and everywhere between.",
  "img": "turf-installation.webp", "alt": "Fresh rolls of buffalo turf being laid on prepared soil in a Central Coast backyard",
  "body": f"""
 <h2>Turf laying Central Coast blocks need, not a roll-and-run job</h2>
-<p>A new lawn fails for one of two reasons: the wrong grass for the site, or poor preparation underneath it. OneVision handles turf laying Central Coast wide with both sorted before a single roll goes down. We strip the old lawn, fix the levels, bring in the right soil, lay the turf tight and roll it, then tell you exactly how to water it for the first month.</p>
+<p>A new lawn fails for one of two reasons: the wrong grass for the site, or poor preparation underneath it. ONEVISION handles turf laying Central Coast wide with both sorted before a single roll goes down. We strip the old lawn, fix the levels, bring in the right soil, lay the turf tight and roll it, then tell you exactly how to water it for the first month.</p>
 <p>Sandy Peninsula blocks in Umina and Woy Woy drain too fast, clay around Wyong and Tuggerah drains too slowly, and coastal sites in Terrigal, Avoca and Wamberal cop salt wind. Each needs a different preparation and often a different grass. We have laid lawns on all of them.</p>
 
 <h2>Our turf laying Central Coast process</h2>
@@ -761,7 +761,7 @@ SERVICE_BODIES = {
  "img": "hedge-trimming.webp", "alt": "Tall formal hedge trimmed straight along the front of a federation home on the Upper North Shore",
  "body": f"""
 <h2>Hedge trimming North Shore gardens were built around</h2>
-<p>The Upper North Shore runs on hedges. Murraya along the front fence, lilly pilly screening the neighbours, box edging the beds and the occasional three-metre photinia that nobody has been game to touch in years. OneVision does hedge trimming North Shore wide, from Roseville to Mount Ku-ring-gai, with the tools and the eye to get lines straight and faces clean, and every clipping cleared away afterwards.</p>
+<p>The Upper North Shore runs on hedges. Murraya along the front fence, lilly pilly screening the neighbours, box edging the beds and the occasional three-metre photinia that nobody has been game to touch in years. ONEVISION does hedge trimming North Shore wide, from Roseville to Mount Ku-ring-gai, with the tools and the eye to get lines straight and faces clean, and every clipping cleared away afterwards.</p>
 <p>We trim by hand and with powered hedgers as the job needs, use string lines on long formal runs, and work off platforms and ladders for tall screens. The result is a hedge that looks like a hedge, not something that was hacked at on a Saturday.</p>
 
 <h2>What we trim</h2>
@@ -794,14 +794,14 @@ SERVICE_BODIES = {
   ("How often should hedges be trimmed on the Upper North Shore?", "Two to three times a year for fast growers such as murraya, lilly pilly and photinia: late spring, late summer and a light autumn tidy. Formal box and conifer hedges hold their shape on one or two trims a year. Regular trimming keeps hedges dense and avoids hard reductions later."),
   ("Can you reduce a hedge that has grown too tall?", "Yes, in stages. Most hedges tolerate being brought down by about a third in one cut, so an overgrown screen is reduced over two or three trims across a growing season. Conifers are the exception and cannot be cut back into bare wood, so we manage their height rather than reduce it."),
   ("Do you take the hedge clippings away?", "Yes. Every hedge trimming job includes raking and removing the clippings, and blowing down paths, lawn and driveway afterwards. You are left with a trimmed hedge and a clean yard, nothing else."),
-  ("Do you trim hedges on the Central Coast too?", "Yes. OneVision trims hedges across the Central Coast as well as the Upper North Shore, from Woy Woy and Umina through Gosford, Terrigal and The Entrance to Wyong and Toukley. Coastal hedges of westringia, coprosma and lilly pilly are trimmed on the same schedule system."),
+  ("Do you trim hedges on the Central Coast too?", "Yes. ONEVISION trims hedges across the Central Coast as well as the Upper North Shore, from Woy Woy and Umina through Gosford, Terrigal and The Entrance to Wyong and Toukley. Coastal hedges of westringia, coprosma and lilly pilly are trimmed on the same schedule system."),
  ]},
 "garden-clean-ups": {
  "lede": "One-off garden clean ups across the Central Coast for overgrown yards, pre-sale presentation and end of lease. Cut back, mowed, weeded, cleared and hauled away, usually in a single visit.",
  "img": "clean-ups.webp", "alt": "Cleared and tidied Central Coast backyard with green waste stacked on a trailer after a garden clean up",
  "body": f"""
 <h2>Garden clean up Central Coast yards that have got away</h2>
-<p>Some gardens just need a reset. A rental that has come back overgrown, a house going on the market next week, a block you bought with the garden untouched for years, or a family home where the yard got away over a busy summer. OneVision does garden clean up Central Coast wide, and we turn up with the mower, the hedgers, the brushcutter and the trailer to get it done in one go.</p>
+<p>Some gardens just need a reset. A rental that has come back overgrown, a house going on the market next week, a block you bought with the garden untouched for years, or a family home where the yard got away over a busy summer. ONEVISION does garden clean up Central Coast wide, and we turn up with the mower, the hedgers, the brushcutter and the trailer to get it done in one go.</p>
 <p>We work the whole coast, from Woy Woy, Umina and Ettalong on the Peninsula through Gosford, Erina, Terrigal and The Entrance to Wyong, Toukley and Budgewoi. Most one-off clean ups are finished in a single day, and all the green waste leaves with us.</p>
 
 <h2>What a garden clean up Central Coast job includes</h2>
@@ -841,7 +841,7 @@ SERVICE_BODIES = {
  "img": "weed-control.webp", "alt": "Weed-free paved path and lawn edge beside a healthy green lawn with a backpack sprayer on the grass",
  "body": f"""
 <h2>Weed control Central Coast lawns and gardens actually need</h2>
-<p>Pulling weeds by hand on a Saturday works right up until it does not. Once bindii, clover, nutgrass, oxalis or winter grass have set in a lawn or a bed, they come back every season unless they are treated correctly and at the right time. OneVision provides weed control Central Coast wide, using the right product for the weed and the surface, applied by someone who knows what the weed is.</p>
+<p>Pulling weeds by hand on a Saturday works right up until it does not. Once bindii, clover, nutgrass, oxalis or winter grass have set in a lawn or a bed, they come back every season unless they are treated correctly and at the right time. ONEVISION provides weed control Central Coast wide, using the right product for the weed and the surface, applied by someone who knows what the weed is.</p>
 <p>The Central Coast's sandy soils, mild winters and coastal humidity mean weeds barely stop growing. A weed control program timed to the seasons is the difference between a lawn you enjoy and one you spend your weekends fighting.</p>
 
 <h2>Where our weed control Central Coast service treats</h2>
@@ -897,13 +897,13 @@ def build_service(s):
     write(f"services/{s['slug']}/index.html", head(s["title"], s["meta"], path, og_img=f"/assets/img/{b['img']}", schema=schema) + body)
 
 def build_services_index():
-    title = "Lawn & Garden Services Central Coast & North Shore | OneVision"
-    meta = "All OneVision services: lawn mowing, garden maintenance, turf installation, hedge trimming, garden clean ups and weed control across the Central Coast and Upper North Shore."
+    title = "Lawn & Garden Services Central Coast & North Shore"
+    meta = "Lawn mowing, garden care, turf, hedges, clean ups and weed control across the Central Coast and Upper North Shore. Free quotes from ONEVISION."
     path = "/services/"
     cards = ""
     for i, s in enumerate(SERVICES):
         cards += f"""<a href="{svc_url(s['slug'])}" class="svc-card reveal" data-d="{i%3}">
-  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} by OneVision Lawns &amp; Gardens" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
+  <div class="svc-card__media"><img src="/assets/img/{s['img']}" alt="{esc(s['name'])} by ONEVISION LAWNS &amp; GARDENS" loading="lazy" width="800" height="600"><span class="svc-card__num">0{i+1}</span></div>
   <div class="svc-card__body"><span class="icon">{ICONS[s['icon']]}</span><h3>{esc(s['h1'].split(':')[0].replace(' & the Upper North Shore','').replace(' for Lawns, Garden Beds & Paths',''))}</h3><p>{esc(s['card'])}</p><span class="link-arrow">{esc(s['dd'])} {ICONS['arrow']}</span></div>
 </a>"""
     schema = [local_business(), breadcrumbs([("Home", "/"), ("Services", path)]),
@@ -922,16 +922,16 @@ def build_services_index():
 # AREAS
 # ---------------------------------------------------------------------------
 UNS_FAQ = [
- ("Do you have a gardener available in Hornsby and Wahroonga?", "Yes. OneVision runs regular garden maintenance and lawn mowing rounds through Hornsby, Wahroonga, Turramurra, St Ives, Pymble and the rest of the Upper North Shore. Fortnightly and monthly visits are available, along with one-off clean ups and hedge trimming. Call or send the address for a free quote."),
+ ("Do you have a gardener available in Hornsby and Wahroonga?", "Yes. ONEVISION runs regular garden maintenance and lawn mowing rounds through Hornsby, Wahroonga, Turramurra, St Ives, Pymble and the rest of the Upper North Shore. Fortnightly and monthly visits are available, along with one-off clean ups and hedge trimming. Call or send the address for a free quote."),
  ("What does a North Shore gardener charge?", "Gardening on the Upper North Shore is priced per visit on the size of the garden, what is planted and how often we come. Regular customers pay a fixed rate each visit. Because North Shore gardens tend to be large and heavily planted, we quote every property individually after seeing it or photos."),
  ("Which Upper North Shore suburbs do you cover?", "All 25: Roseville, Lindfield, East Lindfield, Killara, East Killara, Gordon, Pymble, West Pymble, Turramurra, South Turramurra, North Turramurra, Warrawee, Wahroonga, North Wahroonga, St Ives, St Ives Chase, Hornsby, Normanhurst, Waitara, Thornleigh, Westleigh, Asquith, Hornsby Heights, Mount Colah and Mount Ku-ring-gai."),
  ("Can you handle large established gardens with mature hedges?", "Yes, that is most of what we do on the North Shore. Big federation and mid-century gardens with tall murraya, lilly pilly and photinia hedges, shaded buffalo lawns under gums, and long formal edges. We bring platforms for tall hedges and adjust mowing heights for shade."),
- ("Do you also mow lawns on the North Shore, or just garden?", "Both, on the same visit. Most Upper North Shore customers have OneVision mow and edge the lawn, trim the hedges and tidy the beds in one booking, which works out cheaper than a separate mowing service and gardener."),
+ ("Do you also mow lawns on the North Shore, or just garden?", "Both, on the same visit. Most Upper North Shore customers have ONEVISION mow and edge the lawn, trim the hedges and tidy the beds in one booking, which works out cheaper than a separate mowing service and gardener."),
 ]
 
 def build_area_uns():
-    title = "Gardener North Shore | Upper North Shore Lawns | OneVision"
-    meta = "Gardener North Shore: regular lawn and garden maintenance for Upper North Shore homes from Roseville to Hornsby and Mount Ku-ring-gai. Free quotes from OneVision."
+    title = "Gardener North Shore | Upper North Shore Lawns | ONEVISION"
+    meta = "Gardener North Shore: regular lawn and garden care for Upper North Shore homes from Roseville to Hornsby and Mount Ku-ring-gai. Free quotes from ONEVISION."
     path = "/areas/upper-north-shore/"
     h1 = "Gardener North Shore: Lawn &amp; Garden Care for the Upper North Shore"
     schema = [local_business(), faq_schema(UNS_FAQ), breadcrumbs([("Home", "/"), ("Areas", "/areas/"), ("Upper North Shore", path)]),
@@ -942,7 +942,7 @@ def build_area_uns():
   <div class="wrap layout">
     <article class="prose reveal">
       <h2>A gardener North Shore homes can rely on</h2>
-      <p>Finding a reliable gardener on the North Shore is a familiar problem. The gardens up here are large, mature and heavily planted, and a lot of mowing services will not touch the hedges or the beds. OneVision Lawns &amp; Gardens is a gardener North Shore homeowners book for the whole property: lawn mowed and edged, hedges kept straight, beds weeded and mulched, and the waste gone at the end of every visit.</p>
+      <p>Finding a reliable gardener on the North Shore is a familiar problem. The gardens up here are large, mature and heavily planted, and a lot of mowing services will not touch the hedges or the beds. ONEVISION LAWNS &amp; GARDENS is a gardener North Shore homeowners book for the whole property: lawn mowed and edged, hedges kept straight, beds weeded and mulched, and the waste gone at the end of every visit.</p>
       <p>We run regular rounds through the Ku-ring-gai suburbs of Roseville, Lindfield, Killara, Gordon, Pymble, Turramurra, Warrawee, Wahroonga and St Ives, and through Hornsby Shire in Hornsby, Normanhurst, Waitara, Thornleigh, Westleigh, Asquith, Hornsby Heights, Mount Colah and Mount Ku-ring-gai. Every suburb between Roseville and the Hawkesbury is covered.</p>
 
       <h2>What a gardener North Shore homes need does</h2>
@@ -983,8 +983,8 @@ def build_area_uns():
     write("areas/upper-north-shore/index.html", head(title, meta, path, og_img="/assets/img/area-north-shore.webp", schema=schema) + body)
 
 def build_areas_index():
-    title = "Service Areas | Central Coast & Upper North Shore | OneVision"
-    meta = "Every suburb OneVision Lawns & Gardens covers: 91 Central Coast suburbs from Woy Woy to Gwandalan and 25 Upper North Shore suburbs from Roseville to Mount Ku-ring-gai."
+    title = "Service Areas | Central Coast & Upper North Shore"
+    meta = "Every suburb ONEVISION covers: 91 on the Central Coast from Woy Woy to Gwandalan and 25 on the Upper North Shore from Roseville to Mount Ku-ring-gai."
     path = "/areas/"
     schema = [local_business(), breadcrumbs([("Home", "/"), ("Areas", path)])]
     body = header_html("areas") + page_hero("Areas we service: Central Coast &amp; Upper North Shore", "Two regions, 116 suburbs, one crew. Find your suburb below and get a free quote for lawn mowing, garden maintenance, hedges, clean ups, weed control or new turf.", [("Home", "/"), ("Areas", path)], "area-central-coast.webp", "Coastal Central Coast home with a green front lawn and ocean beyond", eyebrow="Where we work") + f"""
@@ -1024,17 +1024,17 @@ def build_areas_index():
 # ABOUT / CONTACT / THANK YOU / PRIVACY / 404
 # ---------------------------------------------------------------------------
 def build_about():
-    title = "About OneVision Lawns & Gardens | Owner-Operated Lawn Care"
-    meta = "OneVision Lawns & Gardens is an owner-operated lawn mowing and garden maintenance business run by Lachlan Donohoe, servicing the Central Coast and Sydney's Upper North Shore."
+    title = "About ONEVISION LAWNS & GARDENS | Owner-Operated Lawn Care"
+    meta = "ONEVISION LAWNS & GARDENS is an owner-operated lawn and garden business run by Lachlan Donohoe, serving the Central Coast and Upper North Shore."
     path = "/about/"
     schema = [local_business(), breadcrumbs([("Home", "/"), ("About", path)]), {"@type": "AboutPage", "url": SITE_URL + path, "name": title, "about": {"@id": SITE_URL + "/#business"}}]
-    body = header_html("about") + page_hero("About OneVision Lawns &amp; Gardens", f"An owner-operated lawn and garden business run by {OWNER}. One crew, two regions, and a simple promise: turn up when booked, do the whole job, leave the place clean.", [("Home", "/"), ("About", path)], "about-ute.webp", "OneVision work ute and trailer loaded with lawn equipment", eyebrow="Who we are") + f"""
+    body = header_html("about") + page_hero("About ONEVISION LAWNS &amp; GARDENS", f"An owner-operated lawn and garden business run by {OWNER}. One crew, two regions, and a simple promise: turn up when booked, do the whole job, leave the place clean.", [("Home", "/"), ("About", path)], "about-ute.webp", "ONEVISION work ute and trailer loaded with lawn equipment", eyebrow="Who we are") + f"""
 <section class="section on-light">
   <div class="wrap intro">
     <div class="reveal">
       <span class="eyebrow">The short version</span>
       <h2>One vision: lawns and gardens looked after properly</h2>
-      <p class="lede">OneVision Lawns &amp; Gardens was started by {OWNER} to do lawn and garden maintenance the way customers keep saying they cannot find: reliable, thorough and priced honestly.</p>
+      <p class="lede">ONEVISION LAWNS &amp; GARDENS was started by {OWNER} to do lawn and garden maintenance the way customers keep saying they cannot find: reliable, thorough and priced honestly.</p>
       <p>We are not a franchise. There is no territory fee built into your price and no call centre between you and the person doing the work. When you call {PHONE}, you get {OWNER.split()[0]}. When the crew turns up, it is the same crew every visit, and they know your yard.</p>
       <p>We work two regions: the Central Coast, from the Woy Woy Peninsula to Gwandalan, and Sydney's Upper North Shore and Hornsby Shire. The two are different jobs. Coastal lawns, sandy soil and holiday homes on one side; big established gardens, tall hedges and shaded lawns on the other. We are set up for both.</p>
       <ul class="checks">
@@ -1065,18 +1065,18 @@ def build_about():
     write("about/index.html", head(title, meta, path, og_img="/assets/img/about-ute.webp", schema=schema) + body)
 
 def build_contact():
-    title = "Contact OneVision | Free Lawn & Garden Quote | 0497 209 276"
-    meta = "Get a free quote from OneVision Lawns & Gardens. Call 0497 209 276, email, or send the form for lawn mowing, garden maintenance, hedges, clean ups, weed control or turf."
+    title = "Contact ONEVISION | Free Lawn & Garden Quote | 0408 595 570"
+    meta = "Free quotes from ONEVISION LAWNS & GARDENS. Call 0408 595 570 or send the form for lawn mowing, garden care, hedges, clean ups, weeds or turf."
     path = "/contact/"
     schema = [local_business(), breadcrumbs([("Home", "/"), ("Contact", path)]), {"@type": "ContactPage", "url": SITE_URL + path, "name": title}]
-    body = header_html("contact") + page_hero("Contact OneVision for a free lawn or garden quote", f"Call {PHONE}, email, or send the form with your address and what needs doing. Quotes are free, and you hear back the same day in most cases.", [("Home", "/"), ("Contact", path)], "macro.webp", "Central Coast backyard garden at dusk", eyebrow="Get in touch") + contact_section() + f"""
+    body = header_html("contact") + page_hero("Contact ONEVISION for a free lawn or garden quote", f"Call {PHONE}, email, or send the form with your address and what needs doing. Quotes are free, and you hear back the same day in most cases.", [("Home", "/"), ("Contact", path)], "macro.webp", "Central Coast backyard garden at dusk", eyebrow="Get in touch") + contact_section() + f"""
 <section class="section on-grey section--tight">
   <div class="wrap">
     <div class="tiles">
       <div class="tile reveal"><span class="icon">{ICONS['clock']}</span><h3>Hours</h3><p>Monday to Saturday from 6am. Quotes answered evenings too.</p></div>
       <div class="tile reveal" data-d="1"><span class="icon">{ICONS['map']}</span><h3>Where we work</h3><p>Central Coast and Sydney's Upper North Shore. <a href="/areas/" class="link-arrow" style="color:var(--green-3)">All 116 suburbs</a></p></div>
       <div class="tile reveal" data-d="2"><span class="icon">{ICONS['star']}</span><h3>Reviews</h3><p>5.0 on Google. <a href="{GMB}" target="_blank" rel="noopener" class="link-arrow" style="color:var(--green-3)">Read them here</a></p></div>
-      <div class="tile reveal" data-d="3"><span class="icon">{ICONS['fb']}</span><h3>Facebook</h3><p>Recent jobs and updates. <a href="{FACEBOOK}" target="_blank" rel="noopener" class="link-arrow" style="color:var(--green-3)">Follow OneVision</a></p></div>
+      <div class="tile reveal" data-d="3"><span class="icon">{ICONS['fb']}</span><h3>Facebook</h3><p>Recent jobs and updates. <a href="{FACEBOOK}" target="_blank" rel="noopener" class="link-arrow" style="color:var(--green-3)">Follow ONEVISION</a></p></div>
     </div>
   </div>
 </section>
@@ -1084,8 +1084,8 @@ def build_contact():
     write("contact/index.html", head(title, meta, path, og_img="/assets/img/macro.webp", schema=schema) + body)
 
 def build_thankyou():
-    title = "Thanks, we have your quote request | OneVision Lawns & Gardens"
-    meta = "Your quote request has been received. OneVision will be in touch shortly."
+    title = "Quote request received | ONEVISION LAWNS & GARDENS"
+    meta = "Your quote request has been received. ONEVISION will be in touch shortly."
     path = "/thank-you/"
     body = header_html("", solid=True) + f"""
 <section class="thanks on-dark grain">
@@ -1105,15 +1105,15 @@ def build_thankyou():
     write("thank-you/index.html", head(title, meta, path, noindex=True) + body)
 
 def build_privacy():
-    title = "Privacy Policy | OneVision Lawns & Gardens"
-    meta = "How OneVision Lawns & Gardens collects and uses the details you send through this website."
+    title = "Privacy Policy | ONEVISION LAWNS & GARDENS"
+    meta = "How ONEVISION LAWNS & GARDENS collects and uses the details you send through this website."
     path = "/privacy/"
     body = header_html("", solid=True) + f"""
 <section class="section on-light" style="padding-top:calc(var(--header-h) + 72px)">
   <div class="wrap wrap--narrow prose">
     <span class="eyebrow">Privacy</span>
     <h1 style="font-size:clamp(2rem,4vw,3rem)">Privacy policy</h1>
-    <p>OneVision Lawns &amp; Gardens ({ADDRESS['street']}, {ADDRESS['suburb']} {ADDRESS['state']} {ADDRESS['postcode']}) collects the details you enter into the quote form on this website: your name, email, phone number, property address, property size, the service you need and any job notes. We use them to quote and deliver the work you asked about and to contact you about it.</p>
+    <p>ONEVISION LAWNS &amp; GARDENS ({ADDRESS['street']}, {ADDRESS['suburb']} {ADDRESS['state']} {ADDRESS['postcode']}) collects the details you enter into the quote form on this website: your name, email, phone number, property address, property size, the service you need and any job notes. We use them to quote and deliver the work you asked about and to contact you about it.</p>
     <p>Form submissions are stored in our customer relationship management system so we can keep track of your enquiry and job history. We do not sell or share your details with third parties for marketing. This website may use cookies and tracking scripts for analytics and to attribute form submissions.</p>
     <p>To see, correct or delete the details we hold about you, email <a href="mailto:{EMAIL}">{EMAIL}</a> or call {PHONE}.</p>
   </div>
@@ -1122,7 +1122,7 @@ def build_privacy():
     write("privacy/index.html", head(title, meta, path, noindex=True) + body)
 
 def build_404():
-    title = "Page not found | OneVision Lawns & Gardens"
+    title = "Page not found | ONEVISION LAWNS & GARDENS"
     body = header_html("", solid=True) + f"""
 <section class="thanks on-dark grain">
   <div>
@@ -1141,8 +1141,8 @@ def build_404():
 POSTS = [
  {"slug": "lawn-mowing-cost-central-coast", "kw": "lawn mowing cost central coast", "date": "2026-09-22", "img": "lawn-mowing.webp",
   "title": "How Much Does Lawn Mowing Cost on the Central Coast?",
-  "meta_title": "Lawn Mowing Cost Central Coast: What Affects the Price (2026)",
-  "meta": "What lawn mowing costs on the Central Coast, what changes the price, and how regular mowing compares to one-off cuts. Honest local answers from OneVision.",
+  "meta_title": "Lawn Mowing Cost Central Coast: What Affects the Price",
+  "meta": "What lawn mowing costs on the Central Coast, what changes the price, and how regular mowing compares to one-off cuts. Honest local answers from ONEVISION.",
   "excerpt": "Price is the first thing people check. Here is what actually drives the cost of a mow on the coast, and how to pay less per visit.",
   "body": f"""
 <p>Lawn mowing cost on the Central Coast is the first thing most people search before they book, and the least clearly answered. Every mowing business prices a little differently, and most will not put a number on a website because no two lawns are the same. This article explains what actually drives the cost of lawn mowing on the Central Coast, so you can tell a fair quote from a bad one.</p>
@@ -1152,7 +1152,7 @@ POSTS = [
 <ul>
   <li><strong>Lawn area.</strong> A courtyard lawn in Long Jetty is a very different job to a 900 square metre block in Kariong or an acreage lot in Somersby. Most businesses price in size bands.</li>
   <li><strong>Condition and length.</strong> A lawn on a fortnightly schedule is a quick, clean cut. A lawn that has not been mowed since May takes two passes, blunts blades and produces bags of clippings. One-off cuts on overgrown lawns cost more for that reason.</li>
-  <li><strong>Edges and extras.</strong> Edging along paths and beds, whipper snipping around fences and trees, and blowing down hard surfaces add time. Some services quote them as extras; at OneVision they are included in every visit.</li>
+  <li><strong>Edges and extras.</strong> Edging along paths and beds, whipper snipping around fences and trees, and blowing down hard surfaces add time. Some services quote them as extras; at ONEVISION they are included in every visit.</li>
   <li><strong>Access and terrain.</strong> Steep blocks in Point Clare, Tascott and Killcare Heights, narrow side gates, retaining walls and terraces all slow the job down.</li>
   <li><strong>Frequency.</strong> Regular customers pay less per visit than one-off cuts, because the lawn is easier and the run is planned.</li>
 </ul>
@@ -1165,18 +1165,18 @@ POSTS = [
 <h2>Why franchise and app prices look different</h2>
 <p>Franchise mowing services carry territory fees and marketing levies that end up in the per-visit price. Task apps and directories go the other way: cheap headline prices from operators who may not turn up, may not edge and may leave the clippings by the bin. When you compare lawn mowing cost on the Central Coast, compare what is included: edges, whipper snipping, blow-down and green waste removal should all be in the number.</p>
 
-<h2>What is included in an OneVision mow</h2>
-<p>Every <a href="/services/lawn-maintenance/">lawn maintenance</a> visit from OneVision includes mowing at the right height for your grass, edging every hard edge, whipper snipping around obstacles, blowing down paths and driveway, and taking the clippings away. Optional extras like fertilising, aerating and <a href="/services/weed-control/">weed control</a> are quoted separately so you only pay for what you want.</p>
+<h2>What is included in an ONEVISION mow</h2>
+<p>Every <a href="/services/lawn-maintenance/">lawn maintenance</a> visit from ONEVISION includes mowing at the right height for your grass, edging every hard edge, whipper snipping around obstacles, blowing down paths and driveway, and taking the clippings away. Optional extras like fertilising, aerating and <a href="/services/weed-control/">weed control</a> are quoted separately so you only pay for what you want.</p>
 
 <h2>How to get an accurate quote</h2>
 <p>Send us the address, a rough lawn size and how often you want it done. A couple of photos help if the lawn is overgrown. We come back with a fixed price per visit, usually the same day, and that price holds for every visit after unless you change the scope. <a href="/contact/">Request a free lawn mowing quote</a>, or call {PHONE}.</p>
 """,
   "faq": [("Is lawn mowing cheaper on a regular schedule?", "Yes. Regular fortnightly or monthly mowing on the Central Coast costs less per visit than one-off cuts because the lawn is shorter, the job is quicker and the run is planned. One-off cuts on overgrown lawns are priced higher to cover the extra passes and clippings."),
-          ("Does the lawn mowing price include edging?", "At OneVision, yes. Edging, whipper snipping, blowing down hard surfaces and green waste removal are included in every mowing visit. Some other services quote them as extras, so check what a headline price actually covers before comparing.")]},
+          ("Does the lawn mowing price include edging?", "At ONEVISION, yes. Edging, whipper snipping, blowing down hard surfaces and green waste removal are included in every mowing visit. Some other services quote them as extras, so check what a headline price actually covers before comparing.")]},
  {"slug": "best-time-to-lay-turf-central-coast", "kw": "best time to lay turf central coast", "date": "2026-09-22", "img": "turf-installation.webp",
   "title": "When to Lay New Turf on the Central Coast, and Which Grass Copes With Coastal Conditions",
-  "meta_title": "Best Time to Lay Turf on the Central Coast & Which Grass to Use",
-  "meta": "The best time to lay turf on the Central Coast, month by month, and which grass varieties handle sand, salt and shade. Practical advice from OneVision Lawns.",
+  "meta_title": "Best Time to Lay Turf on the Central Coast + Which Grass",
+  "meta": "The best time to lay turf on the Central Coast, month by month, and which grasses handle sand, salt and shade. Practical advice from ONEVISION.",
   "excerpt": "Spring is the window, but the grass you choose matters as much as the month. What works on sandy, salty and shaded coastal blocks.",
   "body": f"""
 <p>The best time to lay turf on the Central Coast is spring, from September to November, followed closely by early autumn in March and April. Both give warm soil, mild air temperatures and enough rain to help a new lawn root without daily hosing. Turf can go down in any month on the coast, but the timing changes how much work establishment takes.</p>
@@ -1209,8 +1209,8 @@ POSTS = [
           ("How long should I water new turf?", "Keep new turf moist for the first two weeks, watering daily in spring and up to twice daily in summer, especially in coastal wind. From week three, reduce to every second or third day. Once the turf cannot be lifted at the corner it has rooted and can move to normal watering.")]},
  {"slug": "how-often-to-trim-hedges-north-shore", "kw": "how often to trim hedges north shore", "date": "2026-09-22", "img": "hedge-trimming.webp",
   "title": "How Often Should You Trim Hedges on the Upper North Shore?",
-  "meta_title": "How Often to Trim Hedges on the North Shore | OneVision Lawns",
-  "meta": "How often to trim murraya, lilly pilly, photinia, box and conifer hedges on Sydney's Upper North Shore, and when in the year to do it. Advice from OneVision.",
+  "meta_title": "How Often to Trim Hedges on the North Shore | ONEVISION",
+  "meta": "How often to trim murraya, lilly pilly, photinia, box and conifer hedges on the Upper North Shore, and when in the year to do it. From ONEVISION.",
   "excerpt": "Murraya, lilly pilly, photinia, buxus and conifer all want different treatment. A season-by-season guide for Wahroonga to Roseville.",
   "body": f"""
 <p>How often to trim hedges on the North Shore depends on what the hedge is. Fast growers like murraya, lilly pilly and photinia need two to three trims a year to stay dense and straight. Formal box and conifer hedges hold their shape on one or two. Leave any of them for a couple of seasons and you are into a staged reduction rather than a trim, which costs more and looks worse for a year.</p>
@@ -1240,10 +1240,10 @@ POSTS = [
  {"slug": "spring-garden-clean-up-checklist-central-coast", "kw": "spring garden clean up checklist", "date": "2026-09-22", "img": "clean-ups.webp",
   "title": "The Spring Garden Clean Up Checklist for Central Coast Homes",
   "meta_title": "Spring Garden Clean Up Checklist for Central Coast Homes",
-  "meta": "A practical spring garden clean up checklist for Central Coast homes: lawn, beds, hedges, weeds, paths and gutters, in the right order. From OneVision Lawns & Gardens.",
+  "meta": "A spring garden clean up checklist for Central Coast homes: lawn, beds, hedges, weeds, paths and gutters, in the right order. From ONEVISION.",
   "excerpt": "September is when coastal gardens get away. Work through this list in order and the yard is ready for summer, or book it out and let us do it.",
   "body": f"""
-<p>This spring garden clean up checklist is written for Central Coast gardens, where mild winters mean the weeds never really stopped and September growth arrives all at once. Work through it in this order and the garden is set up for summer. If you get to the end and decide it is a day you would rather not spend, the whole list is what a <a href="/services/garden-clean-ups/">OneVision garden clean up</a> covers.</p>
+<p>This spring garden clean up checklist is written for Central Coast gardens, where mild winters mean the weeds never really stopped and September growth arrives all at once. Work through it in this order and the garden is set up for summer. If you get to the end and decide it is a day you would rather not spend, the whole list is what a <a href="/services/garden-clean-ups/">ONEVISION garden clean up</a> covers.</p>
 
 <h2>1. Clear before you cut</h2>
 <p>Start by removing what is on the ground: leaf litter from gums and liquidambars, fallen branches, dead annuals and the winter's accumulation of debris in beds and along fences. Raking first means the mower and hedgers are not fighting through it, and it shows you what the beds actually look like.</p>
@@ -1278,8 +1278,8 @@ POSTS = [
 
 def build_blog():
     # index
-    title = "Lawn & Garden Blog | Central Coast & North Shore | OneVision"
-    meta = "Practical lawn and garden advice for the Central Coast and Upper North Shore: mowing costs, when to lay turf, hedge trimming and spring clean ups from OneVision."
+    title = "Lawn & Garden Blog | Central Coast & North Shore | ONEVISION"
+    meta = "Lawn and garden advice for the Central Coast and Upper North Shore: mowing costs, when to lay turf, hedge trimming and spring clean ups. From ONEVISION."
     path = "/blog/"
     cards = ""
     for i, p in enumerate(POSTS):
@@ -1287,7 +1287,7 @@ def build_blog():
   <img src="/assets/img/{p['img']}" alt="{esc(p['title'])}" loading="lazy" width="400" height="300">
   <div class="post-card__body"><span class="meta">{p['date']}</span><h3>{esc(p['title'])}</h3><p>{esc(p['excerpt'])}</p><span class="link-arrow" style="color:var(--green-3)">Read the article {ICONS['arrow']}</span></div>
 </a>"""
-    schema = [local_business(), breadcrumbs([("Home", "/"), ("Blog", path)]), {"@type": "Blog", "url": SITE_URL + path, "name": "OneVision lawn and garden blog", "publisher": {"@id": SITE_URL + "/#business"}}]
+    schema = [local_business(), breadcrumbs([("Home", "/"), ("Blog", path)]), {"@type": "Blog", "url": SITE_URL + path, "name": "ONEVISION lawn and garden blog", "publisher": {"@id": SITE_URL + "/#business"}}]
     body = header_html("blog") + page_hero("Lawn &amp; garden advice for the coast and the North Shore", "Straight answers to the questions we get asked on the job: what things cost, when to do them, and what actually works on Central Coast and Upper North Shore blocks.", [("Home", "/"), ("Blog", path)], "macro.webp", "Close-up of dewy grass blades", eyebrow="Blog") + f"""
 <section class="section on-light"><div class="wrap"><div class="posts">{cards}</div></div></section>
 {cta_strip()}

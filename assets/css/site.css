@@ -725,3 +725,8 @@ strong{font-weight:700}
   .brand img{width:42px;height:42px}
   .hero .trust{grid-template-columns:1fr}
 }
+
+/* quote card sits on dark sections: keep its own text dark (was inheriting white from .on-dark) */
+.on-dark .form-card h3,.on-dark-2 .form-card h3,.form-card h3{color:var(--ink)}
+.on-dark .form-card .hint,.on-dark-2 .form-card .hint,.form-card .hint{color:var(--grey-5)}
+.on-dark .form-card .form-note,.form-card .form-note{color:var(--grey-4)}

@@ -60,7 +60,7 @@ The GHL external tracking script (`tk_5c1ff04a744b42bb929155e4cb46b534`) is load
 ## Before launch (open items)
 
 1. **Domain.** `SITE_URL` in `build.py` is a placeholder (`onevisionlawnsandgardens.com.au`). Set the real domain, rebuild. It drives canonicals, `og:url`, schema `@id`s and `sitemap.xml`.
-2. **Phone number.** Site uses `0497 209 276` (supplied). The Google Business Profile shows `0408 595 570`. One number must be chosen and used everywhere; the site changes in one place (`PHONE` / `PHONE_RAW` in `build.py`).
+2. **Phone number.** Resolved: the site now uses `0408 595 570`, matching the Google Business Profile. Change it in one place (`PHONE` / `PHONE_RAW` in `build.py`) if it ever moves.
 3. **Hero video.** Hot-linked from the Higgsfield CDN (`HERO_VIDEO_URL` in `build.py`). Download it, put it at `assets/video/hero.mp4` and point the constant there. The poster image is local so the hero still works if the link dies.
 4. **Photos.** All imagery is AI-generated (Higgsfield). The build environment could not reach the Higgsfield CDN, so pages currently reference the full-resolution originals there (1.5 to 2.7 MB PNGs each, too heavy for production). Run `python3 tools/fetch_assets.py` on any normal machine to pull them into `assets/img/` as optimised WebP, set `USE_LOCAL_IMAGES = True` in `build.py`, rebuild and commit. Swap in real job photos as they come through; job IDs are in `docs/assets.md`.
 5. **FAQ answers and pricing language** were drafted without Lachlan's input. Confirm scope, schedules and the "text the day before" promise before go-live.
