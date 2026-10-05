@@ -120,29 +120,71 @@
     if (isFile && /\/$/.test(u.pathname)) u = new URL(u.href + 'index.html');
     return u.href;
   }
-  document.querySelectorAll('form.quote-form').forEach(function (form) {
-    form.addEventListener('submit', function (e) {
-      // Capture phase: runs before any third-party submit listener and cannot be swallowed by one.
-      e.preventDefault();
-      var hp = form.querySelector('.hp input');
-      if (hp && hp.value) return;
-      if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (form.dataset.sending) return;
-      form.dataset.sending = '1';
-      form.classList.add('is-sending');
-      var btn = form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+  function resetForm(form) {
+    delete form.dataset.sending;
+    form.classList.remove('is-sending');
+    form.removeAttribute('aria-busy');
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = false;
+    var st = form.querySelector('.form-status');
+    if (st) st.textContent = '';
+  }
+  // Show the loading state, record the enquiry, then go to the thank-you page. Safe to call twice.
+  function send(form) {
+    if (form.dataset.sending) return;
+    form.dataset.sending = '1';
+    form.classList.add('is-sending');
+    form.setAttribute('aria-busy', 'true');
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
+    var st = form.querySelector('.form-status');
+    if (st) st.textContent = 'Sending your quote request…';
+    // Honeypot: a real visitor can never see or fill this, so a value means a bot.
+    // Bots still get the normal "sent" experience; they just aren't counted as a lead.
+    var trap = form.querySelector('.hp input');
+    if (!(trap && trap.value)) {
       try {
         var data = {};
-        new FormData(form).forEach(function (v, k) { data[k] = v; });
+        new FormData(form).forEach(function (v, k) { if (k !== 'ov_trap') data[k] = v; });
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'quote_form_submit', form_id: form.id || 'quote-form', service_needed: data.service_needed || '' });
         try { sessionStorage.setItem('ov_last_enquiry', JSON.stringify(data)); } catch (err) {}
       } catch (err) {}
-      var target = resolveTarget(form.getAttribute('data-redirect'));
-      // Give the tracking script's own listener (it fires after this one) a beat to send its beacon.
-      window.setTimeout(function () { window.location.assign(target); }, 500);
+    }
+    var target = resolveTarget(form.getAttribute('data-redirect'));
+    // Give the tracking script's own submit listener a moment to send its beacon.
+    window.setTimeout(function () { window.location.assign(target); }, 700);
+  }
+  function invalid(form) {
+    if (form.checkValidity()) return false;
+    form.reportValidity();
+    var first = form.querySelector(':invalid');
+    if (first && first.focus) first.focus();
+    return true;
+  }
+  document.querySelectorAll('form.quote-form').forEach(function (form) {
+    resetForm(form);
+    form.addEventListener('submit', function (e) {
+      // Capture phase on the form itself: runs ahead of the tracking script's bubbling listener.
+      e.preventDefault();
+      if (form.dataset.sending) return;
+      if (invalid(form)) return;
+      send(form);
     }, true);
+  });
+  // Safety net: if anything stops the submit event from reaching the form,
+  // a valid click on the button still shows the loading state and redirects.
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('form.quote-form button[type="submit"]');
+    if (!btn) return;
+    var form = btn.form;
+    if (!form || form.dataset.sending) return;
+    if (invalid(form)) { e.preventDefault(); return; }
+    window.setTimeout(function () { send(form); }, 250);
+  }, true);
+  // Coming back with the browser's Back button restores the page from cache: clear the "sending" state.
+  window.addEventListener('pageshow', function () {
+    document.querySelectorAll('form.quote-form').forEach(resetForm);
   });
 
   /* ---- opened straight from disk: make folder links land on their index.html ---- */

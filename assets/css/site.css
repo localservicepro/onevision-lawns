@@ -487,8 +487,17 @@ strong{font-weight:700}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);background:var(--white);box-shadow:0 0 0 4px var(--green-tint)}
 .quote-form .btn{margin-top:4px}
 .form-note{grid-column:1/-1;font-size:.82rem;color:var(--grey-4);margin:4px 0 0}
-.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
-.quote-form.is-sending .btn{opacity:.7;pointer-events:none}
+.hp,.hp[hidden]{display:none!important}
+.quote-form .btn-sending{display:none;align-items:center;gap:10px}
+.quote-form.is-sending .btn-label{display:none}
+.quote-form.is-sending .btn-sending{display:inline-flex}
+.quote-form.is-sending .btn{pointer-events:none;cursor:progress;transform:none}
+.quote-form.is-sending input,.quote-form.is-sending select,.quote-form.is-sending textarea{opacity:.6;transition:opacity .3s}
+.spinner{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(0,0,0,.25);border-top-color:#0b0b0b;animation:ov-spin .7s linear infinite;flex:none}
+@keyframes ov-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:1.6s}}
+.form-status{margin:0;font-size:.85rem;color:#555;min-height:0}
+.form-status:empty{display:none}
 @media (max-width:520px){.quote-form{grid-template-columns:1fr}}
 
 /* ---------- CTA strip ---------- */

@@ -348,8 +348,9 @@ def quote_form(form_id, preselect=None, compact=False, heading="Get your free qu
   <div class="field"><label for="{form_id}-size">Property size</label><select id="{form_id}-size" name="property_size" required><option value="" disabled selected>Select size</option>{sizes}</select></div>
   <div class="field"><label for="{form_id}-service">Service needed</label><select id="{form_id}-service" name="service_needed" required>{opts}</select></div>
   <div class="field full"><label for="{form_id}-notes">Job notes</label><textarea id="{form_id}-notes" name="job_notes" placeholder="Anything we should know: access, pets, how overgrown it is, when you need it done"></textarea></div>
-  <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
-  <button type="submit" class="btn btn--primary btn--block full">{ICONS['arrow']} Send my quote request</button>
+  <div class="hp" hidden aria-hidden="true"><label for="{form_id}-trap">Leave this empty</label><input type="text" id="{form_id}-trap" name="ov_trap" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore data-form-type="other"></div>
+  <button type="submit" class="btn btn--primary btn--block full"><span class="btn-label">{ICONS['arrow']} Send my quote request</span><span class="btn-sending" aria-hidden="true"><span class="spinner"></span> Sending…</span></button>
+  <p class="form-status" role="status" aria-live="polite"></p>
   <p class="form-note">No obligation. We reply by phone or email, and never share your details.</p>
 </form>"""
 
