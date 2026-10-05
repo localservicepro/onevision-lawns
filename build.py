@@ -27,7 +27,7 @@ GMB = "https://share.google/zm2cHQuHjUxuBLEnU"
 FACEBOOK = "https://www.facebook.com/share/1J6kHBYudL/?mibextid=wwXIfr"
 # TODO: replace with the real .com.au domain once registered (drives canonical, og:url, sitemap).
 SITE_URL = "https://onevisionlawnsandgardens.com.au"
-GHL_TRACKING_ID = "tk_5c1ff04a744b42bb929155e4cb46b534"
+GHL_TRACKING_ID = "tk_98eb122384f74f4bbfd3a2e2026b2166"
 # Generated imagery (Higgsfield, gpt_image_2_5). This build environment cannot download from
 # the Higgsfield CDN, so pages reference these URLs directly. Run `python3 tools/fetch_assets.py`
 # on any normal machine to pull them into assets/img/ as optimised WebP, then set

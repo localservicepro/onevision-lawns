@@ -51,7 +51,7 @@ Every quote form (`form.quote-form`) posts these field names, which map 1:1 to t
 | `service_needed` | `{{contact.service_needed}}` |
 | `job_notes` | `{{contact.job_notes}}` |
 
-The GHL external tracking script (`tk_5c1ff04a744b42bb929155e4cb46b534`) is loaded in the `<head>` of every page and captures the submit event. There is no form endpoint: the site's submit handler runs in the capture phase (so no third-party listener can swallow it), lets the tracking script's own listener see the submission, pushes a `quote_form_submit` event to `dataLayer`, then redirects to the thank-you page after 500ms. A honeypot field (`company`) blocks basic bots.
+The GHL external tracking script (`tk_98eb122384f74f4bbfd3a2e2026b2166`) is loaded in the `<head>` of every page and captures the submit event. There is no form endpoint: the site's submit handler runs in the capture phase (so no third-party listener can swallow it), lets the tracking script's own listener see the submission, pushes a `quote_form_submit` event to `dataLayer`, then redirects to the thank-you page after 500ms. A honeypot field (`company`) blocks basic bots.
 
 ## QA
 
