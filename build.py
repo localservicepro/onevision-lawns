@@ -48,6 +48,25 @@ IMAGES = {
     "area-central-coast": _CDN + "hf_20260928_144359_8a1100bd-ce3c-44fa-b8e6-3c9a95d0cab4.png",
     "contact-dusk": _CDN + "hf_20260928_144358_8f4a555a-dc15-47e0-9d01-ca31f47c0544.png",
 }
+# Real job photos supplied by the client (Google Drive folder "Photos for website",
+# 1hRLLVRxDJ5nDpxJM0l63fMKK2f9EDR7_). Each one replaces the generated image in its own
+# service's existing slots, so layouts are unchanged. Served through Drive's public thumbnail
+# endpoint (it converts the iPhone HEIC originals to JPEG) until tools/fetch_assets.py
+# self-hosts them. "focus" is the object-position used for every crop of that photo.
+DRIVE_PHOTOS = {
+    "lawn-mowing":        {"id": "13ePN5JPW4yyHB3ozjJMVmy_qLGSuPQRZ", "focus": "50% 55%"},   # striped backyard lawn
+    "garden-maintenance": {"id": "12gkg4P6e-YnNzzOVnTomRF4Ae7d6go77", "focus": "50% 55%"},   # flowering beds by a path
+    "turf-installation":  {"id": "1MlLI7ycPTbPZbSAue09IFlQwKdJu5fER", "focus": "40% 28%"},   # new turf on the verge, work ute
+    "hedge-trimming":     {"id": "17cWwHclEp2gnpY3S6o-KLIyIHqEcjy5-", "focus": "60% 45%"},   # cone topiary hedges
+    "clean-ups":          {"id": "127z9SQy2pulsRn4ZZQHkozlAb-mZFVf8", "focus": "50% 30%"},   # tidied stepping-stone path
+    "weed-control":       {"id": "1LZ54gsWrEFjCWQFw_HUM7DiZb4oeZhc4", "focus": "50% 22%"},   # weed-free mulched bed
+    "work-lawn-pool":     {"id": "1c5KrYLvhkemH3e5ID0Vd2Y-PaTYXB_ME", "focus": "50% 48%"},   # mown lawn beside a pool
+    "work-lawn-steps":    {"id": "1mcrMjrW5nhEXRnImVC36ef9LARS_l5JI", "focus": "50% 40%"},   # stepping stones set in lawn
+}
+
+def drive_url(key, w):
+    return f"https://drive.google.com/thumbnail?id={DRIVE_PHOTOS[key]['id']}&sz=w{w}"
+
 # Hero loop rendered with Higgsfield (kling3_0, 5s, 16:9). Hot-linked for now; download and self-host at /assets/video/hero.mp4 before launch.
 HERO_VIDEO_URL = "https://d8j0ntlcm91z4.cloudfront.net/user_3EWpoiN6nlg900Jz4gzZzRlxgtK/hf_20260928_145907_35c8138b-ebb4-4b24-a53b-6f0c2e2602be.mp4"
 CTA = "Get a Free Quote"
@@ -546,7 +565,7 @@ def build_home():
       <a href="/about/" class="link-arrow" style="margin-top:26px">More about ONEVISION {ICONS['arrow']}</a>
     </div>
     <div class="intro__media reveal" data-d="1">
-      <img src="/assets/img/about-ute.webp" alt="ONEVISION LAWNS &amp; GARDENS work ute and trailer loaded with mowers on a leafy suburban street" loading="lazy" width="1200" height="900">
+      <img src="/assets/img/work-lawn-pool.webp" alt="Healthy mown backyard lawn beside a fenced pool, looked after by ONEVISION LAWNS &amp; GARDENS" loading="lazy" width="1200" height="900">
       <div class="intro__badge"><b>5.0</b>Google rating</div>
     </div>
   </div>
@@ -635,7 +654,7 @@ def build_home():
 SERVICE_BODIES = {
 "lawn-maintenance": {
  "lede": "Regular lawn mowing for Hornsby and the Upper North Shore, from Roseville up to Mount Ku-ring-gai, plus the Central Coast. Mowed, edged, whipper snipped and blown down, on a schedule that suits you.",
- "img": "lawn-mowing.webp", "alt": "Lawn mower cutting clean stripes on a buffalo lawn in Hornsby",
+ "img": "lawn-mowing.webp", "alt": "Freshly mown backyard lawn with even stripes inside a colorbond fence, maintained by ONEVISION LAWNS & GARDENS",
  "body": f"""
 <h2>Lawn mowing in Hornsby that turns up when it says it will</h2>
 <p>Lawn mowing Hornsby customers book with ONEVISION for one reason: it gets done, properly, on the day we said. Hornsby and the Upper North Shore have big blocks, shaded lawns under gums and buffalo that grows a foot in a wet fortnight. A quick pass with a mower does not cut it, so ours is a full lawn maintenance visit every time.</p>
@@ -678,7 +697,7 @@ SERVICE_BODIES = {
  ]},
 "garden-maintenance": {
  "lede": "Regular gardeners for the Central Coast, from Woy Woy and Umina to Gosford, Terrigal, The Entrance and Wyong. Pruning, weeding, mulching, hedges and lawns on a schedule, with the green waste gone when we leave.",
- "img": "garden-maintenance.webp", "alt": "Neatly mulched garden bed with trimmed native shrubs on the Central Coast",
+ "img": "garden-maintenance.webp", "alt": "Pruned garden beds of flowering shrubs and purple foliage either side of a sandstone path, kept by ONEVISION LAWNS & GARDENS",
  "body": f"""
 <h2>Garden maintenance Central Coast homeowners can actually book</h2>
 <p>Finding a gardener on the Central Coast who turns up regularly is harder than it should be. ONEVISION offers proper garden maintenance Central Coast wide: a fortnightly or monthly visit that keeps the whole garden in order, not a once-a-year blitz. Beds weeded, shrubs pruned, hedges kept in shape, lawns mowed and edged, and the waste taken away.</p>
@@ -719,7 +738,7 @@ SERVICE_BODIES = {
  ]},
 "turf-installation": {
  "lede": "New lawns laid properly across the Central Coast: old turf removed, soil prepared and levelled, the right variety chosen for your block and rolled in so it takes. Gosford, Terrigal, Erina, Wyong and everywhere between.",
- "img": "turf-installation.webp", "alt": "Fresh rolls of buffalo turf being laid on prepared soil in a Central Coast backyard",
+ "img": "turf-installation.webp", "alt": "New turf laid along a front verge and nature strip, with the ONEVISION LAWNS & GARDENS work ute parked alongside",
  "body": f"""
 <h2>Turf laying Central Coast blocks need, not a roll-and-run job</h2>
 <p>A new lawn fails for one of two reasons: the wrong grass for the site, or poor preparation underneath it. ONEVISION handles turf laying Central Coast wide with both sorted before a single roll goes down. We strip the old lawn, fix the levels, bring in the right soil, lay the turf tight and roll it, then tell you exactly how to water it for the first month.</p>
@@ -759,7 +778,7 @@ SERVICE_BODIES = {
  ]},
 "hedge-trimming": {
  "lede": "Straight tops, clean faces and shaped feature hedges for Upper North Shore homes in Wahroonga, St Ives, Turramurra, Pymble, Killara and Hornsby. Clippings cleared before we leave.",
- "img": "hedge-trimming.webp", "alt": "Tall formal hedge trimmed straight along the front of a federation home on the Upper North Shore",
+ "img": "hedge-trimming.webp", "alt": "Cone-shaped topiary hedges freshly trimmed along a sandstone retaining wall, clippings still on the path",
  "body": f"""
 <h2>Hedge trimming North Shore gardens were built around</h2>
 <p>The Upper North Shore runs on hedges. Murraya along the front fence, lilly pilly screening the neighbours, box edging the beds and the occasional three-metre photinia that nobody has been game to touch in years. ONEVISION does hedge trimming North Shore wide, from Roseville to Mount Ku-ring-gai, with the tools and the eye to get lines straight and faces clean, and every clipping cleared away afterwards.</p>
@@ -799,7 +818,7 @@ SERVICE_BODIES = {
  ]},
 "garden-clean-ups": {
  "lede": "One-off garden clean ups across the Central Coast for overgrown yards, pre-sale presentation and end of lease. Cut back, mowed, weeded, cleared and hauled away, usually in a single visit.",
- "img": "clean-ups.webp", "alt": "Cleared and tidied Central Coast backyard with green waste stacked on a trailer after a garden clean up",
+ "img": "clean-ups.webp", "alt": "Tidied garden path of sandstone stepping stones between trimmed rosemary and clipped round shrubs after a garden clean up",
  "body": f"""
 <h2>Garden clean up Central Coast yards that have got away</h2>
 <p>Some gardens just need a reset. A rental that has come back overgrown, a house going on the market next week, a block you bought with the garden untouched for years, or a family home where the yard got away over a busy summer. ONEVISION does garden clean up Central Coast wide, and we turn up with the mower, the hedgers, the brushcutter and the trailer to get it done in one go.</p>
@@ -839,7 +858,7 @@ SERVICE_BODIES = {
  ]},
 "weed-control": {
  "lede": "Targeted weed control for Central Coast lawns, garden beds, driveways and paths. Bindii, clover, nutgrass, oxalis and the rest treated properly and followed up, from Gosford to The Entrance and Woy Woy to Wyong.",
- "img": "weed-control.webp", "alt": "Weed-free paved path and lawn edge beside a healthy green lawn with a backpack sprayer on the grass",
+ "img": "weed-control.webp", "alt": "Weed-free garden bed finished with fresh bark mulch behind a brick retaining wall",
  "body": f"""
 <h2>Weed control Central Coast lawns and gardens actually need</h2>
 <p>Pulling weeds by hand on a Saturday works right up until it does not. Once bindii, clover, nutgrass, oxalis or winter grass have set in a lawn or a bed, they come back every season unless they are treated correctly and at the right time. ONEVISION provides weed control Central Coast wide, using the right product for the weed and the surface, applied by someone who knows what the weed is.</p>
@@ -1029,7 +1048,7 @@ def build_about():
     meta = "ONEVISION LAWNS & GARDENS is an owner-operated lawn and garden business run by Lachlan Donohoe, serving the Central Coast and Upper North Shore."
     path = "/about/"
     schema = [local_business(), breadcrumbs([("Home", "/"), ("About", path)]), {"@type": "AboutPage", "url": SITE_URL + path, "name": title, "about": {"@id": SITE_URL + "/#business"}}]
-    body = header_html("about") + page_hero("About ONEVISION LAWNS &amp; GARDENS", f"An owner-operated lawn and garden business run by {OWNER}. One crew, two regions, and a simple promise: turn up when booked, do the whole job, leave the place clean.", [("Home", "/"), ("About", path)], "about-ute.webp", "ONEVISION work ute and trailer loaded with lawn equipment", eyebrow="Who we are") + f"""
+    body = header_html("about") + page_hero("About ONEVISION LAWNS &amp; GARDENS", f"An owner-operated lawn and garden business run by {OWNER}. One crew, two regions, and a simple promise: turn up when booked, do the whole job, leave the place clean.", [("Home", "/"), ("About", path)], "work-lawn-steps.webp", "Charcoal stepping stones set into a neatly edged lawn, finished by ONEVISION LAWNS & GARDENS", eyebrow="Who we are") + f"""
 <section class="section on-light">
   <div class="wrap intro">
     <div class="reveal">
@@ -1045,7 +1064,7 @@ def build_about():
         <li>{ICONS['check']} Regular customers get a text the day before each visit</li>
       </ul>
     </div>
-    <div class="intro__media reveal" data-d="1"><img src="/assets/img/lawn-mowing.webp" alt="Lawn mower cutting clean stripes on a well kept lawn" loading="lazy" width="1200" height="900"><div class="intro__badge"><b>116</b>suburbs covered</div></div>
+    <div class="intro__media reveal" data-d="1"><img src="/assets/img/lawn-mowing.webp" alt="Freshly mown backyard lawn with even stripes, maintained by ONEVISION LAWNS &amp; GARDENS" loading="lazy" width="1200" height="900"><div class="intro__badge"><b>116</b>suburbs covered</div></div>
   </div>
 </section>
 <section class="section on-dark grain">
@@ -1063,7 +1082,7 @@ def build_about():
 {cta_strip()}
 {contact_section()}
 """ + footer_html()
-    write("about/index.html", head(title, meta, path, og_img="/assets/img/about-ute.webp", schema=schema) + body)
+    write("about/index.html", head(title, meta, path, og_img="/assets/img/work-lawn-pool.webp", schema=schema) + body)
 
 def build_contact():
     title = "Contact ONEVISION | Free Lawn & Garden Quote | 0408 595 570"
@@ -1336,10 +1355,29 @@ def build_sitemap():
     write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
 
 # ---------------------------------------------------------------------------
+def _photo_img(m):
+    """Give every <img> of a client photo its focal point, and (until self-hosted) a Drive URL
+    sized for the slot: full-bleed banners (width="1600") get a wider file than cards."""
+    tag, key = m.group(0), m.group(1)
+    if key not in DRIVE_PHOTOS:
+        return tag
+    tag = tag.replace("<img ", f'<img style="object-position:{DRIVE_PHOTOS[key]["focus"]}" ', 1)
+    if not USE_LOCAL_IMAGES:
+        w = 1600 if 'width="1600"' in tag else 1000
+        tag = tag.replace(f"/assets/img/{key}.webp", drive_url(key, w))
+    return tag
+
 def resolve_images(content):
+    content = re.sub(r'<img [^>]*?src="/assets/img/([a-z0-9-]+)\.webp"[^>]*>', _photo_img, content)
     if USE_LOCAL_IMAGES:
         return content
-    return re.sub(r"/assets/img/([a-z0-9-]+)\.webp", lambda m: IMAGES.get(m.group(1), m.group(0)), content)
+    def url(m):
+        k = m.group(1) or m.group(2)
+        if k in DRIVE_PHOTOS:
+            return drive_url(k, 1200)
+        return IMAGES.get(k, m.group(0))
+    # The optional SITE_URL prefix (og:image, JSON-LD) is swallowed so remote URLs stay valid.
+    return re.sub(re.escape(SITE_URL) + r"/assets/img/([a-z0-9-]+)\.webp|/assets/img/([a-z0-9-]+)\.webp", url, content)
 
 def relativise(rel, content):
     """Turn root-relative hrefs/srcs into page-relative ones so the site works from any
