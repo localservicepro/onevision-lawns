@@ -24,7 +24,7 @@ python3 build.py
 | `/areas/upper-north-shore/` | gardener north shore |
 | `/areas/`, `/services/`, `/about/`, `/contact/`, `/blog/` + 4 posts, `/thank-you/` (noindex), `/privacy/`, `404.html` | supporting |
 
-Pages are folders with an `index.html` so URLs match the report (`/services/lawn-maintenance`). All asset and link paths are page-relative, so the site works from the domain root, a subfolder, or opened straight from disk (double-click `index.html`; folder links and the form redirect resolve to the right `index.html`). Host on anything static (Netlify, Vercel, Cloudflare Pages, GHL custom hosting, cPanel). Point 404s at `404.html`.
+Pages are folders with an `index.html` so URLs match the report (`/services/lawn-maintenance`). All asset and link paths are page-relative, so the site works from the domain root, a subfolder, or opened straight from disk (double-click `index.html`; folder links and the form redirect resolve to the right `index.html`). Host on anything static (Netlify, Vercel, Cloudflare Pages, GHL custom hosting, cPanel). Point 404s at `404.html` (the one page kept on root-absolute paths, since hosts serve it at any URL).
 
 ## Areas map
 
@@ -59,12 +59,12 @@ The GHL external tracking script (`tk_98eb122384f74f4bbfd3a2e2026b2166`) is load
 
 ## Before launch (open items)
 
-1. **Domain.** `SITE_URL` in `build.py` is a placeholder (`onevisionlawnsandgardens.com.au`). Set the real domain, rebuild. It drives canonicals, `og:url`, schema `@id`s and `sitemap.xml`.
+1. **Domain.** Live at `https://www.onevisionlawnsandgardens.com.au` (`SITE_URL` in `build.py`; the bare domain 301s to www). It drives canonicals, `og:url`, schema `@id`s, `robots.txt` and `sitemap.xml` (whose `lastmod` is the build date). If the host ever changes, change that one constant and rebuild.
 2. **Phone number.** Resolved: the site now uses `0408 595 570`, matching the Google Business Profile. Change it in one place (`PHONE` / `PHONE_RAW` in `build.py`) if it ever moves.
 3. **Hero video.** Hot-linked from the Higgsfield CDN (`HERO_VIDEO_URL` in `build.py`). Download it, put it at `assets/video/hero.mp4` and point the constant there. The poster image is local so the hero still works if the link dies.
 4. **Photos.** The client's own job photos (Google Drive folder "Photos for website") now fill every service slot: the service cards, each service page banner, the matching blog banners, the homepage intro and the About page. They are listed in `DRIVE_PHOTOS` in `build.py`, each with a focal point (`focus`) used for every crop. Until self-hosted they load through Drive's public thumbnail endpoint, so the Drive files must stay shared "anyone with the link" (viewer is enough). The remaining images (hero poster, grass close-up band, area and contact banners) are AI-generated (Higgsfield) and hot-linked from its CDN as full-size PNGs. Before launch run `python3 tools/fetch_assets.py` on any normal machine: it pulls both sets into `assets/img/` as optimised WebP (client photos win over a generated image of the same name). Then set `USE_LOCAL_IMAGES = True` in `build.py`, rebuild and commit. Higgsfield job IDs are in `docs/assets.md`.
 5. **FAQ answers and pricing language** were drafted without Lachlan's input. Confirm scope, schedules and the "text the day before" promise before go-live.
 6. **Insurance / ABN.** Not stated on the site because not supplied. Add to footer and About once confirmed.
 7. **Reviews.** No review text was supplied, so the site links to Google rather than quoting. Add verbatim reviews to the proof section when available.
-8. **Open Graph image.** `assets/img/og-home.jpg` is referenced but not yet created; supply a 1200x630 image or the hero will be used by most platforms via the page image.
+8. **Open Graph image.** `assets/img/og-home.jpg` (1200x630) is rendered by `python3 tools/make_og.py` from the logo and brand type; re-run it if the phone number or strapline changes. Service and blog pages use their own photo as the share image.
 9. Verify the GHL tracking script is recording submissions on the live domain (submit a test enquiry and check the contact appears with all seven fields).

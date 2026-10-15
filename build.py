@@ -10,6 +10,7 @@ re-run, commit the generated HTML.
 """
 import json, os, re, html as htmlmod
 from pathlib import Path
+from datetime import date
 from areamap import area_map
 
 ROOT = Path(__file__).parent
@@ -26,7 +27,7 @@ ADDRESS = {"street": "45 Braeside Road", "suburb": "Greystanes", "state": "NSW",
 GMB = "https://share.google/zm2cHQuHjUxuBLEnU"
 FACEBOOK = "https://www.facebook.com/share/1J6kHBYudL/?mibextid=wwXIfr"
 # TODO: replace with the real .com.au domain once registered (drives canonical, og:url, sitemap).
-SITE_URL = "https://onevisionlawnsandgardens.com.au"
+SITE_URL = "https://www.onevisionlawnsandgardens.com.au"  # live host; the bare domain 301s here
 GHL_TRACKING_ID = "tk_98eb122384f74f4bbfd3a2e2026b2166"
 # Generated imagery (Higgsfield, gpt_image_2_5). This build environment cannot download from
 # the Higgsfield CDN, so pages reference these URLs directly. Run `python3 tools/fetch_assets.py`
@@ -209,6 +210,9 @@ def head(title, meta, path, og_img="/assets/img/og-home.jpg", schema=None, noind
     canonical = SITE_URL + path
     robots = '<meta name="robots" content="noindex, nofollow">' if noindex else '<meta name="robots" content="index, follow, max-image-preview:large">'
     graph = {"@context": "https://schema.org", "@graph": schema or []}
+    og_dims = ('<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+               f'<meta property="og:image:alt" content="{esc(BUSINESS)} - lawn mowing and garden care, Central Coast and Upper North Shore">\n'
+               if og_img == "/assets/img/og-home.jpg" else "")
     return f"""<!doctype html>
 <html lang="en-AU">
 <head>
@@ -224,7 +228,7 @@ def head(title, meta, path, og_img="/assets/img/og-home.jpg", schema=None, noind
 <meta property="og:description" content="{esc(meta)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE_URL}{og_img}">
-<meta property="og:locale" content="en_AU">
+{og_dims}<meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{esc(title)}">
 <meta name="twitter:description" content="{esc(meta)}">
@@ -1349,7 +1353,7 @@ def build_sitemap():
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for u in urls:
         p = pri.get(u, "0.8" if u.startswith("/services/") else "0.6")
-        xml += f"  <url><loc>{SITE_URL}{u}</loc><lastmod>2026-09-28</lastmod><changefreq>monthly</changefreq><priority>{p}</priority></url>\n"
+        xml += f"  <url><loc>{SITE_URL}{u}</loc><lastmod>{date.today().isoformat()}</lastmod><changefreq>monthly</changefreq><priority>{p}</priority></url>\n"
     xml += "</urlset>\n"
     write("sitemap.xml", xml)
     write("robots.txt", f"User-agent: *\nAllow: /\nDisallow: /thank-you/\n\nSitemap: {SITE_URL}/sitemap.xml\n")
@@ -1394,7 +1398,7 @@ def write(rel, content):
     p = ROOT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
     content = resolve_images(content)
-    if rel.endswith(".html"):
+    if rel.endswith(".html") and rel != "404.html":  # hosts serve 404.html at any depth
         content = relativise(rel, content)
     with open(p, "w", encoding="utf-8") as f:
         f.write(content)

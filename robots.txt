@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /thank-you/
 
-Sitemap: https://onevisionlawnsandgardens.com.au/sitemap.xml
+Sitemap: https://www.onevisionlawnsandgardens.com.au/sitemap.xml
